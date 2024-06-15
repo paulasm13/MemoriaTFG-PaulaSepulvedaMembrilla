@@ -568,16 +568,38 @@ con su debida justificación.
 \section{Arquitectura general} 
 \label{sec:arquitectura}
 
-Si tu proyecto es un software, siempre es bueno poner la arquitectura (que es cómo se estructura tu programa a ``vista de pájaro'').
-diagrama de entidad-relación.
+En la figura~\ref{fig:arquitectura_general} se puede observar la arquitectura general del proyecto, que se compone de varias etapas interconectadas que permiten llevar a cabo la ejecución eficiente del mismo.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=14cm, keepaspectratio]{img/arquitectura_general.png}
+  \caption{Diagrama arquitectura general}
+  \label{fig:arquitectura_general}
+\end{figure}
+
+En la figura~\ref{fig:vista_pajaro} se presenta un diagrama de funcionamiento que nos permite comprender el desarrollo de la programación. 
+\\Este diagrama consta del programa principal \textit{init.py}, que se ejecuta mediante el comando \textit{python3 init.py repo-url \<name\_urlclone\>}, cuya función principal es la de analizar un repositorio.
+Este script extrae los valores de la URL correspondiente, verifica que se utilice el protocolo correcto, y obtiene acceso al repositorio para clonarlo en nuestro directorio.
+Posteriormente, el script obtiene una lista con todos los archivos y subdirectorios del repositorio, y va recorriendo uno a uno todos los archivos para obtener su número de \textit{commits} y su ruta.
+\\Durante este proceso, se ejecuta el script \textit{git\_blameall.py} con la finalidad de analizar línea a línea el código de cada archivo, recopilando diversos datos que se almacenan en varias tablas de la base de datos.
+\\Finalmente, se ejecuta el script \textit{graphics.py} con el objetivo de generar distintas gráficas que muestran los resultados de los análisis estadísticos y la aplicación de las métricas estudiadas previamente.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=14cm, keepaspectratio]{img/vista_pajaro.png}
+  \caption{Diagrama de funcionamiento}
+  \label{fig:vista_pajaro}
+\end{figure}
 
 \section{Fases del proyecto} 
 \label{sec:arquitectura}
 
+En esta sección se desglosan las distintas fases del proyecto, describiendo el desarrollo de cada una de ellas.
+
 \subsection{Recopilación de datos}
 \label{subsec:estilo}
 
-elección de repositorios, tabla con datos, etc
+En esta fase, 
 
 \subsection{Almacenamiento y procesado de datos}
 \label{subsec:estilo}
