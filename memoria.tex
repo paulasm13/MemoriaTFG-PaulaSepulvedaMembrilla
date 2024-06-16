@@ -511,6 +511,15 @@ La biblioteca \textit{subprocess}\footnote{\url{https://docs.python.org/es/3/lib
 procesos en segundo plano. Una de las capacidades más útiles consiste en que permite al usuario controlar las entradas, salidas e incluso los errores que genera el proceso hijo desde
 dentro del código Python. Este modulo facilita la automatización de tareas y la integración de otros programas con el código de Python.
 
+\subsection{Os}
+\label{subsec:os}
+
+
+La librería \textit{os}\footnote{\url{https://docs.python.org/es/3.10/library/os.html}} permite usar funcionalidades dependientes del sistema operativo, como indica su nombre, por lo que es una biblioteca de gran tamaño y tiene muchos métodos.
+Entre las funcionalidades más útiles se encuentran la de listar, crear y/o eliminar archivos y directorios, obtener el nombre de un archivo así como su directorio, obtener la extensión y tamaño de un archivo, así como obtener las fechas de creación, modificación
+y/o de acceso de un archivo. En general, esta librería facilita el trabajo con archivos y directorios independientemente de la plataforma, lo cual es bastante importante ya que debemos de tener en cuenta que los posibles usuarios de nuestro programa pueden tener distintos
+sistemas operativos.
+
 \subsection{Matplotlib}
 \label{subsec:estilo}
 
@@ -572,12 +581,12 @@ En la figura~\ref{fig:arquitectura_general} se puede observar la arquitectura ge
 
 \begin{figure}
   \centering
-  \includegraphics[width=14cm, keepaspectratio]{img/arquitectura_general.png}
+  \includegraphics[width=14cm, keepaspectratio]{img/Arquitectura_general.png}
   \caption{Diagrama arquitectura general}
   \label{fig:arquitectura_general}
 \end{figure}
 
-En la figura~\ref{fig:vista_pajaro} se presenta un diagrama de funcionamiento que nos permite comprender el desarrollo de la programación. 
+En la figura~\ref{fig:funcionamiento} se presenta un diagrama de funcionamiento que nos permite comprender el desarrollo de la programación. 
 \\Este diagrama consta del programa principal \textit{init.py}, que se ejecuta mediante el comando \textit{python3 init.py repo-url \<name\_urlclone\>}, cuya función principal es la de analizar un repositorio.
 Este script extrae los valores de la URL correspondiente, verifica que se utilice el protocolo correcto, y obtiene acceso al repositorio para clonarlo en nuestro directorio.
 Posteriormente, el script obtiene una lista con todos los archivos y subdirectorios del repositorio, y va recorriendo uno a uno todos los archivos para obtener su número de \textit{commits} y su ruta.
@@ -586,9 +595,9 @@ Posteriormente, el script obtiene una lista con todos los archivos y subdirector
 
 \begin{figure}
   \centering
-  \includegraphics[width=14cm, keepaspectratio]{img/vista_pajaro.png}
+  \includegraphics[width=4cm, keepaspectratio]{img/Diagrama_Funcionamiento.png}
   \caption{Diagrama de funcionamiento}
-  \label{fig:vista_pajaro}
+  \label{fig:funcionamiento}
 \end{figure}
 
 \section{Fases del proyecto} 
@@ -599,13 +608,28 @@ En esta sección se desglosan las distintas fases del proyecto, describiendo el 
 \subsection{Recopilación de datos}
 \label{subsec:estilo}
 
-En esta fase, 
+En esta etapa del proyecto, tenemos como objetivo identificar proyectos de software libre que nos resulten más interesantes para estudiar su evolución. Por lo que se realiza una exhaustiva investigación, revisando gran variedad de artículos e
+información, para obtener una serie de repositorios que cumplan los siguientes criterios: que sean proyectos FOSS\footnote{Free/Open Source Software}, que estén alojados en la plataforma de GitHub y que proporcionen datos que resulten interesantes
+para analizar su evolución a lo largo de los años.
+\\Tras estudiar las distintas posibilidades, se han elegido los principales repositorios de los proyectos de la tabla X para estudiar su evolución a lo largo del tiempo. En la selección se han considerado factores como el número de colaboradores y/o
+su variación a lo largo de los años, la diversidad de lenguajes de programación, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria.
+\\Una vez hecha la selección de repositorios, se procede a analizar cada línea de código de todos los archivos que los componen. Mediante el script \textit{git\_blameall.py} .... exlicación de cómo obtiene los datos...
 
-\subsection{Almacenamiento y procesado de datos}
+*HACER TABLA DE REPOS*
+
+\subsection{Procesado y almacenamiento de datos}
 \label{subsec:estilo}
 
+Una vez que se han obtenido los datos, se lleva a cabo un proceso de revisión y procesado de datos para elegir los más adecuados para nuestro proyecto.
+
 diagrama de entidad-relación BBDD
-procesado: quitar comentarios, .zip archivos, lineas en blanco, etc
+\begin{figure}
+  \centering
+  \includegraphics[width=14cm, keepaspectratio]{img/Diagrama_E-R.png}
+  \caption{Diagrama de Entidad-Relación}
+  \label{fig:entidad-relacion}
+\end{figure}
+procesado: quitar comentarios, .zip archivos, lineas en blanco, resolver problemas codificación, archivos en blanco se descartan (codificación 'None' no interesantes)
 número de palabras, comentario o no, etc
 
 \subsection{Extracción de datos}
