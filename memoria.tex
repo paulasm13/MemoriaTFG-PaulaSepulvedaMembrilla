@@ -521,7 +521,7 @@ y/o de acceso de un archivo. En general, esta librería facilita el trabajo con 
 sistemas operativos.
 
 \subsection{Matplotlib}
-\label{subsec:estilo}
+\label{subsec:matplotlib}
 
 \textit{Matplotlib}\footnote{\url{https://matplotlib.org/}} es una librería muy completa de código abierto que se utiliza para crear visualizaciones estáticas, animadas e interactivas con Python.
 Ha sido desarrollada por John Hunter en 2002, con el objetivo inicial de visualizar las señales eléctricas del cerebro de personas epilépticas.
@@ -532,7 +532,7 @@ cualquier tipo de gráfica para visualizar análisis estadísticos.
 a los ejes de un gráfico. Su interfaz es muy intuitiva, lo que permite a los usuarios diseñar gráficos completamente personalizables con facilidad.
 
 \subsection{Pandas}
-\label{subsec:estilo}
+\label{subsec:pandas}
 \textit{Pandas} es una librería de Python especializada en el manejo y análisis de estructuras de datos. Define nuevas estructuras de datos basadas en los arrays de la librería \textit{NumPy} pero
 con nuevas funcionalidades, nos permite leer y escribir fácilmente ficheros en bases de datos SQL y nos permite acceder a los datos mediante índices o nombres para filas y columnas.
 Nos permite trabajar con tres estructuras de datos diferentes: estructura de una dimensión denominadas \textit{series}, estructura de dos dimensiones o tablas denominadas \textit{DataFrame} y estructura
@@ -541,7 +541,7 @@ de tres dimensiones o cubos llamado \textit{panel}.
 de alto nivel para el análisis en Python, y tiene la finalidad de evolucionar hasta convertirse en la biblioteca de manipulación de datos de código abierto más potente y flexible.
 
 \subsection{Chardet}
-\label{subsec:estilo}
+\label{subsec:chardet}
 
 \textit{Chardet} consiste en una adaptación para Python del detector de codificación de caracteres universal C++ de Mozilla. La detección de la codificación de caracteres es en realidad una detección del lenguaje
 con dificultades, esto es especialmente útil cuando se trabaja con archivos de origen desconocido o múltiples fuentes que pueden tener diferentes codificaciones.
@@ -550,7 +550,7 @@ junto con el nivel de confianza de la detección. En el caso de utilizar esta li
 como tenga la confianza suficiente para determinar su codificación. Esta biblioteca es útil en situaciones donde se reciben archivos históricos de múltiples fuentes con codificaciones no uniformes, como es el caso de nuestro proyecto.
 
 \subsection{Pygments}
-\label{subsec:estilo}
+\label{subsec:pygments}
 
 \textit{Pygments} consiste en una librería de resaltado de sintaxis escrita en Python. Es una herramienta poderosa y flexible para resaltar la sintaxis de código fuente en múltiples lenguajes de programación y formatos
 de salida, permite una personalización significativa para adaptarse a diferentes necesidades y preferencias.
@@ -575,23 +575,16 @@ con su debida justificación.
 \\Exponer el diseño e implementación de nuestro proyecto permite a los lectores entender cómo se ha desarrollado la investigación, además de proporcionarles la capacidad de contribuir o ampliar el proyecto.
 
 \section{Arquitectura general} 
-\label{sec:arquitectura}
+\label{sec:arquitectura-general}
 
-En la figura~\ref{fig:arquitectura_general} se puede observar la arquitectura general del proyecto, que se compone de varias etapas interconectadas que permiten llevar a cabo la ejecución eficiente del mismo.
+En la figura~\ref{fig:arquitectura} se puede observar la arquitectura general del proyecto, que se compone de varias etapas interconectadas que permiten llevar a cabo la ejecución eficiente del mismo.
 
 \begin{figure}
   \centering
   \includegraphics[width=14cm, keepaspectratio]{img/Arquitectura_general.png}
   \caption{Diagrama arquitectura general}
-  \label{fig:arquitectura_general}
+  \label{fig:arquitectura}
 \end{figure}
-
-En la figura~\ref{fig:funcionamiento} se presenta un diagrama de funcionamiento que nos permite comprender el desarrollo de la programación. 
-\\Este diagrama consta del programa principal \textit{init.py}, que se ejecuta mediante el comando \textit{python3 init.py repo-url \<name\_urlclone\>}, cuya función principal es la de analizar un repositorio.
-Este script extrae los valores de la URL correspondiente, verifica que se utilice el protocolo correcto, y obtiene acceso al repositorio para clonarlo en nuestro directorio.
-Posteriormente, el script obtiene una lista con todos los archivos y subdirectorios del repositorio, y va recorriendo uno a uno todos los archivos para obtener su número de \textit{commits} y su ruta.
-\\Durante este proceso, se ejecuta el script \textit{git\_blameall.py} con la finalidad de analizar línea a línea el código de cada archivo, recopilando diversos datos que se almacenan en varias tablas de la base de datos.
-\\Finalmente, se ejecuta el script \textit{graphics.py} con el objetivo de generar distintas gráficas que muestran los resultados de los análisis estadísticos y la aplicación de las métricas estudiadas previamente.
 
 \begin{figure}
   \centering
@@ -600,50 +593,139 @@ Posteriormente, el script obtiene una lista con todos los archivos y subdirector
   \label{fig:funcionamiento}
 \end{figure}
 
+En la figura~\ref{fig:funcionamiento} se presenta un diagrama de funcionamiento que nos permite comprender el desarrollo de la programación. 
+\\Este diagrama consta del programa principal \texttt{init.py}, cuya función principal es clonar un repositorio de GitHub en nuestro directorio y poder recorrer cada uno de sus archivos y subdirectorios respectivamente.
+\\Tras esto, se ejecuta el script \texttt{git\_blameall.py} con la finalidad de analizar línea a línea el código de cada archivo, recopilando diversos datos que se almacenan en varias tablas de la base de datos.
+\\Finalmente, se ejecuta el script \texttt{graphics.py} con el objetivo de generar distintas gráficas que muestran los resultados de los análisis estadísticos y la aplicación de las métricas estudiadas previamente.
+
+
+\section{Arquitectura específica} 
+\label{sec:arquitectura-especifica}
+
+En esta sección, vamos a centrarnos en describir más a fondo el funcionamiento de cada uno de los scripts que conforman nuestro proyecto.
+
+\subsection{Programa inicial}
+\label{subsec:programa-inicial}
+
+El programa inicial se corresponde con el script \texttt{init.py}, ya que como indica el propio nombre, consiste en el script que inicia nuestro programa mediante el comando \textit{python3 init.py repo-url 'name\_urlclone'}.
+Se ejecuta a partir de la URL de un repositorio de GitHub, y entre sus diversas tareas esta la de ejecutar la función principal del programa \texttt{git\_blameall.py}, que como se indica posteriormente se trata del
+programa principal. Sus funciones de manejo son las siguientes:
+
+\begin{itemize}
+  \item \texttt{request\_url()}. Al ejecutar el programa se pide introducir la URL de un repositorio de GitHub, a partir de la cual podemos obtener distintos parámetros de interés para nuestro proyecto. Se obtienen los valores del protocolo y procedencia del
+  repositorio, de manera que mediante la función \texttt{check\_url()} se comprueba que se utilice un protocolo 'https' y que el repositorio elegido sea propio de GitHub. Estos parámetros, junto con el usuario y el nombre del repositorio, nos permiten clonar
+  el repositorio en nuestro directorio mediante la librería \textit{subprocess} en la función \texttt{run\_url()}. Esta función además, ejecuta las las funciones \texttt{get\_directory()} y esta a su vez la función \texttt{get\_path()}, que como el propio nombre
+  indica obtienen el nombre del directorio y la ruta absoluta del directorio en cuestión. Se ha utilizado una ruta absoluta frente a una relativa porque nos aporta claridad para evitar conflictos entre directorios ambiguos dentro del mismo repositorio, además de
+  proporcionarnos independencia frente al lugar en el que se ejecute el script.
+
+  \item \texttt{remove\_excluded()}. La finalidad de esta función consiste en clasificar archivos o directorios que no pueden ser soportados por el comando \textit{git blame} para ser posteriormente eliminados del repositorio clonado, por lo que 
+  se descartan los archivos que tienen las siguientes extensiones [".png", ".jpg", ".jpeg", ".gif", ".pdf", ".exe", ".dll", ".ico", ".db", ".dat", ".class", ".o", ".pyc", ".mp3", ".mp4", ".wav", ".avi", ".bak", ".tmp", ".docx", ".pptx", ".zip",
+  ".tar.gz", ".rar"] así como los siguientes directorios ["node\_modules", "vendor", "Pods"].
+  \\Partiendo de las listas mencionadas anteriormente, se construye una función booleana para clasificar cada archivo o directorio a ser excluido del análisis, mediante el comando \texttt{file\_path.endwith()} se encuentran los archivos con la
+  extensión correspondiente mientras que con la ayuda del separador de directorios específico de Windows \texttt{file\_path.split(os.path.sep)} obtenemos los posibles directorios a descartar. Una vez que tenemos los archivos y/o directorios que 
+  tienen valor 'True', se realiza un recorrido ascendente por el árbol del repositorio clonado con la ayuda de \texttt{os.walk()} para eliminar cada objeto respectivamente. Al ejecutar el programa, se observan por pantalla los objetos que 
+  se han eliminado así como la cantidad de objetos, esto ayuda a comprobar que se realiza un análisis de la cantidad correcta de archivos y/o directorios. 
+
+  \item \texttt{remove\_empty\_files()}. Esta función tiene como finalidad eliminar archivos vacíos que se puedan encontrar en el directorio que se corresponde con el repositorio clonado, así como en todos sus subdirectorios.
+  Toma como parámetro dicho directorio, y crea una lista inicialmente vacía que se utiliza para almacenar los nombres de los archivos eliminados. Mediante \texttt{os.walk()} se realiza un recorrido por todo el árbol del repositorio
+  clonado e itera cada uno de sus archivos, para calcular su tamaño en bytes con el comando \texttt{os.path.getsize()}, y en caso de ser 0 se clasifica como un archivo vacío, y por lo tanto, se elimina mediante la función \texttt{os.remove()}
+  y se añade a la lista de archivos eliminados. Finalmente, con la información incluida en la lista inicial, obtenemos información acerca de que cantidad de archivos se han eliminado y de cuales son sus rutas y nombres respectivamente.
+  
+  \item \texttt{detect\_encoding()}. Esta función es una parte muy importante del código, ya que permite solucionar problemas de codificación al enfrentarse a cualquier tipo de archivo de datos. Tiene como objetivo adivinar el tipo de
+  codificación del archivo pasado como parámetro, para ello realiza una lectura en bytes del archivo y mediante la librería \textit{chardet} detecta la codificación del archivo.
+  
+  \item \texttt{convert\_to\_utf8()}. Esta función tiene como finalidad convertir en un archivo codificado en UTF-8 cada archivo que no esté codificado como tal, usando como parámetros el nombre del archivo a codificar y el tipo de codificación de dicho archivo.
+  Se realiza una lectura en la codificación detectada anteriormente del archivo correspondiente, y se almacena su contenido en una variable. Este contenido se escribe en un archivo temporal, para posteriormente mediante la función \texttt{os.replace()}
+  reescribir el archivo original con el contenido archivo temporal, realizando así una conversión a la codificación UTF-8 de manera segura. 
+
+  \item \texttt{get\_table1()}. A continuación, nos centramos en las tareas relacionadas con la base de datos. La primera tarea consiste en verificar la existencia de la base de datos que vamos a utilizar, esto se ha podido comprobar a través de la conexión a una base de datos
+  \textit{'master'}, la cual nos proporciona la información necesaria, y en caso de que la base de datos denominada 'Analysis\_Github\_Repository' no exista, se procede a crearla. El paso siguiente consiste en crear la tabla denominada 'Repositories', previa comprobación de su existencia.
+  \\Siguiendo en el ámbito de las bases de datos, utilizando la función \texttt{get\_table2()} se crea la tabla denominada 'Files' con las verificaciones necesarias y con una conexión previamente establecida a la base de datos 'Analysis\_Github\_Repository'.
+
+  \item \texttt{read\_directory()}. Esta función es la más importante de todo el script, ya que integra y unifica la mayoria de las funciones descritas anteriormente. En primer lugar, toma como parámetro el nombre del directorio que se va a analizar y crea una lista con todos sus archivos y subdirectorios.
+  De esta lista, descarta el directorio '.git' para el análisis pero teniendo en cuenta que no se puede eliminar, al contener información de vital importancia sobre el repositorio clonado, incluyendo su historial de commits, su configuración así como sus objetos. Tras esto, el procedimiento a seguir consiste
+  en recorrer el árbol del repositorio, clasificando cada objeto de la lista según sea un archivo o un subdirectorio. 
+  \\En caso de ser un archivo, se construye y ejecuta el comando \textit{'git log'} para obtener el historial de commits del archivo. Si el comando falla, se imprime un mensaje de error y se continúa con el siguiente archivo, pero si el comando se ejecuta con éxito, se cuenta el número de commits del archivo, y 
+  en caso de tener un número de commits superior a 0, se ejecuta la función principal del script \texttt{git\_blameall.py}. Mientras tanto, se ejecutan las funciones relacionadas con la codificación original del archivo, y se convierte a UTF-8 en caso de ser necesario. Así como también se adivina el lenguaje de
+  programación del archivo mediante la librería \textit{Pygments}. En caso de ser un subdirectorio, se muestra su nombre por pantalla y se invoca esta función recursivamente, con el objetivo de analizar todos los archivos del repositorio clonado.
+  \\Mediante una conexión a la base de datos se realiza la inserción de datos obtenidos en esta función. Primero se utiliza la función \texttt{insert\_repo\_data()}, que inserta en la tabla 'Repositories' el nombre del repositorio clonado así como su índice correspondiente. Posteriormente se ejecuta la función
+  \texttt{insert\_files\_data()} que se encarga de insertar en la tabla 'Files' el nombre, ruta, ID y número de commits de cada archivo respectivamente. También se ejecuta la función \texttt{insert\_files\_language()}, que inserta el lenguaje de cada archivo dentro de la tabla 'Files'.
+  
+\end{itemize}
+
+\subsection{Programa principal}
+\label{subsec:programa-principal}
+
+El programa principal se corresponde con el script \texttt{git\_blameall.py}, que consiste en el script que analiza cada fichero utilizando distintos comandos de git. Su objetivo principal es obtener datos interesantes del historial de cambios propio de cada archivo, que se utilizarán posteriormente para estudiar y 
+analizar la evolución del repositorio. Sus funciones de manejo son las siguientes:
+
+\subsection{Obtención de gráficos}
+\label{subsec:programa-graficos}
+
+-- EXPLICACIÓN GRÁFICOS ---
+
+Este script extrae los valores de la URL correspondiente, verifica que se utilice el protocolo correcto, y obtiene acceso al repositorio para clonarlo en nuestro directorio.
+Posteriormente, el script obtiene una lista con todos los archivos y subdirectorios del repositorio, y va recorriendo uno a uno todos los archivos para obtener su número de \textit{commits} y su ruta.
+
+
 \section{Fases del proyecto} 
-\label{sec:arquitectura}
+\label{sec:fases-proyecto}
 
 En esta sección se desglosan las distintas fases del proyecto, describiendo el desarrollo de cada una de ellas.
 
 \subsection{Recopilación de datos}
-\label{subsec:estilo}
+\label{subsec:recopilacion}
 
 En esta etapa del proyecto, tenemos como objetivo identificar proyectos de software libre que nos resulten más interesantes para estudiar su evolución. Por lo que se realiza una exhaustiva investigación, revisando gran variedad de artículos e
 información, para obtener una serie de repositorios que cumplan los siguientes criterios: que sean proyectos FOSS\footnote{Free/Open Source Software}, que estén alojados en la plataforma de GitHub y que proporcionen datos que resulten interesantes
 para analizar su evolución a lo largo de los años.
 \\Tras estudiar las distintas posibilidades, se han elegido los principales repositorios de los proyectos de la tabla X para estudiar su evolución a lo largo del tiempo. En la selección se han considerado factores como el número de colaboradores y/o
-su variación a lo largo de los años, la diversidad de lenguajes de programación, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria.
-\\Una vez hecha la selección de repositorios, se procede a analizar cada línea de código de todos los archivos que los componen. Mediante el script \textit{git\_blameall.py} .... exlicación de cómo obtiene los datos...
+su variación a lo largo de los años, la diversidad de lenguajes de programación, la relevancia del proyecto en la plataforma GitHub y en la actualidad, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria.
+\\*HACER TABLA DE REPOS*
+\\Una vez hecha la selección de repositorios, se ha analizado cada uno de ellos haciendo un recorrido de cada archivo y subdirectorio que los componen. En este proceso, nuestro programa comienza detectando la codificación de cada archivo mediante
+la librería \textit{chardet}, y reescribe éste en un archivo codificado mediante UTF-8 para evitar futuros errores de codificación, salvo que la propia codificación del archivo ya sea UTF-8. Al estudiar archivos de diversas procedencias,
+nos topamos con distintas codificaciones que pueden dar problemas a la hora de analizar cada línea de código, por lo que esta tarea es de vital importancia para un correcto funcionamiento del programa.
+Tras la posible conversión, se realiza una lectura del archivo reescrito en UTF-8 para obtener mediante la librería \textit{Pygment} su lenguaje de programación. Este dato, así como la ruta del archivo y su nombre son los datos que se obtienen
+mediante este script. El resto de datos que se recopilan, explicados con mayor detalle en el siguiente apartado, se obtienen mediante el script \textit{git\_blameall.py}.
 
-*HACER TABLA DE REPOS*
 
-\subsection{Procesado y almacenamiento de datos}
-\label{subsec:estilo}
+\subsection{Preprocesado y almacenamiento de datos}
+\label{subsec:procesado-almacenamiento}
 
+Durante el preprocesado de datos, tenemos en cuenta diversas restricciones para que nuestro programa desarrolle un funcionamiento eficiente. Teniendo en cuenta que el comando \textit{git blame} no soporta cualquier tipo de archivo, ajustamos el código
+de manera que se descarten del repositorio clonado los archivos de audio, imágenes, archivos comprimidos 
 Una vez que se han obtenido los datos, se lleva a cabo un proceso de revisión y procesado de datos para elegir los más adecuados para nuestro proyecto.
+- Eliminar archivos a los que no se les aplica git blame
+- Descartar analisis de la carpeta .git al no tener permisos
+- Descartar lineas con una longitud de más de 255 caracteres
+- [ELIMINAR ARCHIVOS EN BLANCO].Esta función nos ha facilitado el procesamiento de archivos vacíos sin obtener errores en la ejecución de nuestro programa. Eliminar los archivos vacíos se ha convertido en una necesidad, ya que nos hemos encontrado con archivos del tipo
+\texttt{init.py} que se utilizan comunmente para importar funciones y/o clases que se utilizan en otros módulos del proyecto, así como para marcar directorios como paquetes de Python.
 
-diagrama de entidad-relación BBDD
+\\EN PROCESAMIENTO DE DATOS: Manejar los datos en archivos UTF-8 nos permite un mayor manejo de los datos..............
+
+
 \begin{figure}
   \centering
   \includegraphics[width=14cm, keepaspectratio]{img/Diagrama_E-R.png}
   \caption{Diagrama de Entidad-Relación}
   \label{fig:entidad-relacion}
 \end{figure}
-procesado: quitar comentarios, .zip archivos, lineas en blanco, resolver problemas codificación, archivos en blanco se descartan (codificación 'None' no interesantes)
+
+procesado: quitar comentarios, .zip archivos, lineas en blanco, archivos en blanco, resolver problemas codificación, archivos en blanco se descartan (codificación 'None' no interesantes)
 número de palabras, comentario o no, etc
 
 \subsection{Extracción de datos}
-\label{subsec:estilo}
+\label{subsec:extraccion}
 
 queries, etc
 
 \subsection{Implementación de métricas y análisis}
-\label{subsec:estilo}
+\label{subsec:metricas}
 
 métricas una a una, subseccion?¿
 
 \subsection{Representación gráfica de resultados}
-\label{subsec:estilo}
+\label{subsec:graficos}
 
 como he hecho las gráficas, etc 
 * mostrarlas y explicarlas en el apartado de resultados, aqui no*
