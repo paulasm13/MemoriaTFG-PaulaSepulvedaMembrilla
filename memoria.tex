@@ -782,14 +782,89 @@ de evitar errores al insertar los datos en la tabla denominada 'Code'.
 \subsection{Implementación de métricas y análisis}
 \label{subsec:metricas}
 
-A continuación, se desarrolla el objetivo más importante de este proyecto que consiste en el análisis de datos.
+A continuación, se desarrolla el objetivo más importante de este proyecto que consiste en el análisis de los datos. Mediante la implementación de distintas métricas, se pretenden estudiar distintos aspectos que resultan interesantes para analizar la evolución de los proyectos
+FOSS\footnote{Free/Open Source Software} a lo largo de los años.
+Tras la recopilación, revisión y limpieza de datos, se procede a la interpretación de los datos para la realización de un análisis estadístico, donde se han tenido en cuenta gran diversidad de factores como la antiguedad y/o tamaño del proyecto, el número de desarrolladores, la
+complejidad que desarrolla, etc. Se realizan distintos análisis estadísticos tanto para el conjunto de todos los proyectos, como para cada uno de ellos de manera individual.
+En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de software libre alojados en GitHub, y se les han aplicado las métricas que se presentan en los siguientes apartados.
 
+\subsubsection{Lenguajes de programación más utilizados}
+\label{subsubsec:lenguajes}
+
+Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo una media con todos los repositorios analizados se obtienen los lenguajes de programación que tienen mayor
+presencia dentro de los proyectos de software libre y código abierto alojados en GitHub. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse con ninguno de ellos se ha clasificado 
+el archivo analizado como aquel que contiene datos en un formato específico definido por el software que lo utiliza, es decir, se ha denominado '\textit{Archivo de datos}' o '\textit{Archivo binario}'.
+
+\[{Lenguaje} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(número repos)} lenguaje_i\]
+
+\subsubsection{Líneas que permanecen en la actualidad}
+\label{subsubsec:lineas-vivas}
+
+Resulta relevante estudiar el número de líneas que permanecen en la versión más actual del proyecto frente al momento de la creación del mismo, es decir, cuántas líneas permanecen intactas desde cualquier fecha pasada del proyecto. 
+Esto puede aportar una estimación del esfuerzo de mantenimiento de cara a un futuro, debido a que un proyecto con una gran cantidad de líneas de código antiguas es más difícil de mantener, ya que puede que los autores 
+hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar que proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
+modificaciones en un período largo de tiempo, así como también se pueden observar proyectos con una tendencia de trabajo constante con la finalidad de mantener el proyecto actualizado.
+\\Entonces, se desarrollan dos métricas, siendo una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra que obtiene en porcentajes esta cantidad
+respecto al tamaño total del proyecto.
+
+\[{Líneas vivas (valor relativo)} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(n líneas vivas)} \frac{lineasvivas}{ntotallineas}\]
+
+\[{Líneas vivas (valor absoluto)} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(n líneas vivas)} \frac{lineasvivas}{ntotallineas} x 100\]
+
+
+\subsubsection{Estabilidad del código}
+\label{subsubsec:estabilidad-codigo}
+
+Medir la estabilidad del código es posible gracias a una métrica denominada \textit{Tasa de Churn}. El análisis de esta métrica implica evaluar cuántas líneas de código han sido eliminadas en un período de tiempo específico.
+Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en este proyecto
+consiste en representar la \textit{tasa de Churn} por cada archivo de los repositorios analizados, de manera que se compruebe así que archivos del repositorio se encuentran más obsoletos.
+
+\[{Tasa de Churn} = \frac{Líneas eliminadas}{Nº total de líneas}\]
+
+\subsubsection{Frecuencia de cambios}
+\label{subsubsec:commits}
+
+Visualizar la frecuencia de cambios a lo largo del tiempo resulta útil para identificar períodos de actividad intensa o inactividad en el desarrollo del proyecto. Además, permite conocer las etapas del proyecto, ya que el desarrollo
+inicial se corresponde con la etapa donde se lleva a cabo una alta frecuencia de cambios, pasando después a una etapa de estabilización con una frecuencia de cambios moderada, y siendo la etapa de mantenimiento aquella que tenga una
+baja frecuencia de cambios. Conocer las etapas del proyecto puede ser útil para realizar una planificación y estimación del trabajo de cara a un futuro, ya que un proyecto con cambios frecuentes y regular resulta menos costoso en
+términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
+\\La métrica utilizada para visualizar la frecuencia de cambios consiste en realizar un sumatorio del número de \textit{commits} realizados en cada uno de los archivos para cada repositorio concreto.
+ 
+\[{Commits} = \sum_{i=1}^{n archivos} commits_i\]
+
+\subsubsection{Número de colaboradores}
+\label{subsubsec:numero-desarrolladores}
+
+Otro dato relevante consiste en conocer la cantidad de colaboradores de un proyecto a lo largo de los años. Esto puede reflejar el crecimiento y la madurez del proyecto, ya que un aumento del número de desarrolladores
+a lo largo del tiempo puede indicar un proyecto en expansión y cada vez más relevante, así como el caso contrario se traduce en una reducción del interés o fases críticas del proyecto. En proyectos de código 
+abierto, el la colaboración de múltiples desarrolladores indica un signo de confianza y relevancia en la comunidad. Por otro lado, un número alto de colaboradores se traduce en una diversidad de contribuciones, que aportan
+diferentes perspectivas, habilidades y conocimientos, lo que puede conducir a un código más robusto con funcionalidades más variadas.
+\\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto a un repositorio concreto a lo largo del tiempo.
+
+\[{Número de colaboradores} = \sum_{i=1}^{n lineas} colaboradores_i\]
+
+
+\subsubsection{Evolución de la actividad de cada colaborador}
+\label{subsubsec:actividad-desarrollador}
+
+Conocer la actividad de cada colaborador del proyecto nos puede resultar interesante para una estimación de costes, ya que evaluando la contribución
+individual se puede realizar una asignación de tareas más eficiente de acuerdo a las capacidades de cada colaborador. También resulta bastante útil conocer
+conocer en qué momento ha desarrollado cada colaborador mayor protagonismo para recurrir a él en caso de tener que realizar posibles modificaciones respecto
+a algo concreto desarrollado en esa etapa del proyecto, esto nos proporciona una mayor gestión de los recursos y una mejor planificación.
+El hecho de visualizar las contribuciones individuales puede ayudar a mejorar el trabajo en equipo y el espíritu de colaboración.
+\\La métrica para conocer la evolución de la actividad de cada colaborador del proyecto consiste en realizar un sumatorio del número de líneas
+creadas por cada desarrollador del código para conocer los valores absolutos. Mientras que comparando con el número total de líneas de todos los colaboradores
+del proyecto se calculan los valores relativos.
+
+\[{Actividad de cada colaborador} = \sum_{i=1}^{n lineas} colaboradores_i\]
+
+\[{Actividad de cada colaborador} = \sum_{i=1}^{n lineas} colaboradores_i x 100\]
 
 \subsection{Representación gráfica de resultados}
 \label{subsec:graficos}
 
-como he hecho las gráficas, etc 
-* mostrarlas y explicarlas en el apartado de resultados, aqui no*
+Una vez que se han definido las métricas y los análisis estadísticos que resultan interesantes en esta investigación, se procede a una representación gráfica
+de los resultados.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
