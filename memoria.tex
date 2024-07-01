@@ -791,25 +791,25 @@ En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de soft
 \subsubsection{Lenguajes de programación más utilizados}
 \label{subsubsec:lenguajes}
 
-Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo una media con todos los repositorios analizados se obtienen los lenguajes de programación que tienen mayor
-presencia dentro de los proyectos de software libre y código abierto alojados en GitHub. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse con ninguno de ellos se ha clasificado 
-el archivo analizado como aquel que contiene datos en un formato específico definido por el software que lo utiliza, es decir, se ha denominado '\textit{Archivo de datos}' o '\textit{Archivo binario}'.
+Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo un cálculo con todos los archivos de los repositorios analizados se obtienen los porcentajes de los lenguajes
+de programación que tienen mayor presencia dentro de los proyectos de software libre y código abierto alojados en GitHub. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse
+con ningún lenguaje conocido se ha clasificado como un archivo que contiene datos en un formato específico definido por el software que lo utiliza, y se ha denominado '\textit{Archivo de datos}' o '\textit{Archivo binario}'.
 
-\[{Lenguaje} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(número repos)} lenguaje_i\]
+\[\text{Porcentaje} \, \text{Lenguaje_i} = \left( \frac{\text{Archivos} \, \text{lenguaje}_i}{\text{Total} \, \text{de} \, \text{archivos}} \right) \times 100\]
 
 \subsubsection{Líneas que permanecen en la actualidad}
 \label{subsubsec:lineas-vivas}
 
 Resulta relevante estudiar el número de líneas que permanecen en la versión más actual del proyecto frente al momento de la creación del mismo, es decir, cuántas líneas permanecen intactas desde cualquier fecha pasada del proyecto. 
 Esto puede aportar una estimación del esfuerzo de mantenimiento de cara a un futuro, debido a que un proyecto con una gran cantidad de líneas de código antiguas es más difícil de mantener, ya que puede que los autores 
-hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar que proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
+hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar qué proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
 modificaciones en un período largo de tiempo, así como también se pueden observar proyectos con una tendencia de trabajo constante con la finalidad de mantener el proyecto actualizado.
-\\Entonces, se desarrollan dos métricas, siendo una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra que obtiene en porcentajes esta cantidad
-respecto al tamaño total del proyecto.
+\\Entonces, se desarrollan dos métricas, una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra para obtener esta cantidad en porcentajes respecto al tamaño total
+del proyecto, y se aplican a cada uno de los repositorios analizados.
 
-\[{Líneas vivas (valor relativo)} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(n líneas vivas)} \frac{lineasvivas}{ntotallineas}\]
+\[\text{Cantidad} \, \text{de} \, \text{líneas} \, \text{vivas} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
 
-\[{Líneas vivas (valor absoluto)} = \frac{1}{XXXXX(número repos)} \sum_{i=1}^{XXXXX(n líneas vivas)} \frac{lineasvivas}{ntotallineas} x 100\]
+\[\text{Porcentaje} \, \text{de} \, \text{líneas} \, \text{vivas} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right) \times 100 \]
 
 
 \subsubsection{Estabilidad del código}
@@ -819,7 +819,9 @@ Medir la estabilidad del código es posible gracias a una métrica denominada \t
 Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en este proyecto
 consiste en representar la \textit{tasa de Churn} por cada archivo de los repositorios analizados, de manera que se compruebe así que archivos del repositorio se encuentran más obsoletos.
 
-\[{Tasa de Churn} = \frac{Líneas eliminadas}{Nº total de líneas}\]
+DUDA: APLICAR POR ARCHIVO O POR REPOS?¿?¿?
+
+\[\text{Tasa} \, \text{de} \, \text{Churn} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
 
 \subsubsection{Frecuencia de cambios}
 \label{subsubsec:commits}
@@ -830,7 +832,7 @@ baja frecuencia de cambios. Conocer las etapas del proyecto puede ser útil para
 términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
 \\La métrica utilizada para visualizar la frecuencia de cambios consiste en realizar un sumatorio del número de \textit{commits} realizados en cada uno de los archivos para cada repositorio concreto.
  
-\[{Commits} = \sum_{i=1}^{n archivos} commits_i\]
+\[\text{Número} \, \text{de} \, \text{commits_i} = \sum_{i=1}^{n} \text{Commits} \, \text{archivo_i}\]
 
 \subsubsection{Número de colaboradores}
 \label{subsubsec:numero-desarrolladores}
@@ -841,8 +843,7 @@ abierto, el la colaboración de múltiples desarrolladores indica un signo de co
 diferentes perspectivas, habilidades y conocimientos, lo que puede conducir a un código más robusto con funcionalidades más variadas.
 \\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto a un repositorio concreto a lo largo del tiempo.
 
-\[{Número de colaboradores} = \sum_{i=1}^{n lineas} colaboradores_i\]
-
+\[\text{Número} \, \text{de} \, \text{colaboradores_i} = \sum_{i=1}^{n} \text{Colaboradores} \, \text{repositorio_i}\]
 
 \subsubsection{Evolución de la actividad de cada colaborador}
 \label{subsubsec:actividad-desarrollador}
@@ -856,9 +857,9 @@ El hecho de visualizar las contribuciones individuales puede ayudar a mejorar el
 creadas por cada desarrollador del código para conocer los valores absolutos. Mientras que comparando con el número total de líneas de todos los colaboradores
 del proyecto se calculan los valores relativos.
 
-\[{Actividad de cada colaborador} = \sum_{i=1}^{n lineas} colaboradores_i\]
+\[\text{Actividad} \, \text{por} \, \text{colaborador} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{colaborador_i}}{\text{Líneas} \, \text{totales}} \right)\]
 
-\[{Actividad de cada colaborador} = \sum_{i=1}^{n lineas} colaboradores_i x 100\]
+\[\text{Porcentaje} \, \text{por} \, \text{colaborador} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{colaborador_i}}{\text{Líneas} \, \text{totales}} \right) \times 100\]
 
 \subsection{Representación gráfica de resultados}
 \label{subsec:graficos}
