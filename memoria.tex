@@ -139,8 +139,8 @@ Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 202X
 \chapter*{}
 \pagenumbering{Roman} % para comenzar la numeracion de paginas en numeros romanos
 \begin{flushright}
-\textit{Dedicado a \\
-mi familia / mi abuelo / mi abuela}
+\textit{Cómo no vas a poder,}
+\\\textit{si hay flores rompiendo el pavimento.}
 \end{flushright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,8 +150,21 @@ mi familia / mi abuelo / mi abuela}
 %\addcontentsline{toc}{chapter}{Agradecimientos} % si queremos que aparezca en el índice
 \markboth{AGRADECIMIENTOS}{AGRADECIMIENTOS} % encabezado 
 
-Aquí vienen los agradecimientos\ldots Aunque está bien acordarse de la pareja, no hay que olvidarse de dar las gracias a tu madre, que aunque a veces no lo parezca disfrutará tanto de tus logros como tú\ldots 
-Además, la pareja quizás no sea para siempre, pero tu madre sí.
+Con la finalización de este proyecto llega el broche final de mi etapa universitaria, donde dejo atrás un período dulce y amargo,
+donde los momentos complicados me han hecho crecer tanto en lo académico como en lo personal.
+
+\\En primer lugar, quiero agradecer a mi familia el hecho de creer siempre en mí, llegar hasta aquí no habría sido posible sin vosotros,
+gracias por vuestra paciencia. A mis padres, gracias por aguantar mi frustración y darme cordura en los momentos difíciles, por enseñarme
+que con esfuerzo y dedicación puedo conseguir grandes cosas. A mi hermano, el mayor espectador de mi vida, tu apoyo incondicional me da alas.
+
+\\Por otro lado, gracias a todos los amigos que me acompañan en el camino, tanto a los de siempre como a los que recién llegados. Para mi la
+amistad tiene un valor enorme y me hacéis sentirlo cada día. En especial gracias a esas amigas, que siempre están cerca cuando todo pesa un poco
+más y que están dispuestas a celebrar mis logros de todo corazón, me hacéis sentir muy afortunada. Una mención especial para esas compañeras de universidad que se han convertido en amigas, siempre se quedará conmigo vuestra generosidad,
+espero que nos quede mucho más por compartir.
+
+\\Por último, gracias a mi tutor de proyecto, Gregorio Robles, por la inspiración y los conocimientos, y por tu ayuda durante la realización de este proyecto.
+
+\\A todos ellos, gracias por el apoyo en esta etapa y por su aportación de distintas maneras a este Trabajo de Fin de Grado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen
@@ -160,17 +173,24 @@ Además, la pareja quizás no sea para siempre, pero tu madre sí.
 %\addcontentsline{toc}{chapter}{Resumen} % si queremos que aparezca en el índice
 \markboth{RESUMEN}{RESUMEN} % encabezado
 
-Aquí viene un resumen del proyecto.
-Ha de constar de tres o cuatro párrafos, donde se presente de manera clara y concisa de qué va el proyecto. 
-Han de quedar respondidas las siguientes preguntas:
-
-\begin{itemize}
-  \item ¿De qué va este proyecto? ¿Cuál es su objetivo principal?
-  \item ¿Cómo se ha realizado? ¿Qué tecnologías están involucradas?
-  \item ¿En qué contexto se ha realizado el proyecto? ¿Es un proyecto dentro de un marco general?
-\end{itemize}
-
-Lo mejor es escribir el resumen al final.
+Este proyecto consiste en un análisis de repositorios FOSS\footnote{Free/Open Source Software} alojados en GitHub, con el
+objetivo de estudiar la evolución del código abierto a lo largo de los años, así como de explorar la presencia de
+posibles tendencias y/o patrones en este sector. 
+\\Para llevar acabo este análisis, se ha desarrollado una herramienta que permite analizar todas las líneas de código presentes
+en un repositorio de GitHub. Esta herramienta realiza un recorrido ascendente por todo el árbol del repositorio, analizando cada
+archivo en cada subdirectorio. El análisis se basa en el uso del comando \textit{git blame}, lo que permite obtener datos relevantes
+de cada versión del archivo investigando su historial de revisiones. 
+Se ha hecho una selección de repositorios teniendo en cuenta diversos criterios, tales como el número de colaboradores y sus
+contribuciones, la diversidad de lenguajes de programación utilizados, la relevancia del proyecto en la plataforma GitHub y su 
+vigencia en la actualidad. Se han incluido tanto proyectos de reciente creación como aquellos con una larga trayectoria, para
+proporcionar una visión más completa y representativa del estado actual del código abierto. 
+\\Empleando la herramienta desarrollada, se han recopilado datos interesantes como el lenguaje de programación empleado,
+el autor y la fecha de creación cada la línea de código, así como el número de revisiones de cada archivo. Una vez recopilados los datos,
+se ha procedido a su filtrado e inserción en una base de datos relacional organizada en tres tablas: \textit{Repositories}, \textit{Files}
+y \textit{Code}. Para conseguir el objetivo de este proyecto, se han desarrollado diversas métricas e índices que permiten realizar un análisis
+estadístico de los datos. Esta metodología se ha aplicado a la información recopilada, y los resultados del análisis se han representado de
+manera gráfica, facilitando la comprensión de la evolución de los proyectos a lo largo de su historial de versiones, y proporcionando una
+visión clara de las tendencias y patrones que puedan existir.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen en inglés
@@ -179,10 +199,20 @@ Lo mejor es escribir el resumen al final.
 %\addcontentsline{toc}{chapter}{Summary} % si queremos que aparezca en el índice
 \markboth{SUMMARY}{SUMMARY} % encabezado
 
-Here comes a translation of the ``Resumen'' into English. 
-Please, double check it for correct grammar and spelling.
-As it is the translation of the ``Resumen'', which is supposed to be written at the end, this as well should be filled out just before submitting.
-
+This project consists of an analysis of FOSS\footnote{Free/Open Source Software} repositories hosted on GitHub, with the aim of studying the
+evolution of open source over the years, as well as exploring the presence of possible trends and/or patterns in this sector.
+\\To carry out this analysis, a tool has been developed to analyse all the lines of code present in a GitHub repository. This tool performs a
+bottom-up traversal of the entire repository tree, analysing each file in each subdirectory. The analysis is based on the use of the \textit{git blame}
+command, which allows to obtain relevant data for each version of the file by investigating its revision history. A selection of repositories
+has been made taking into account various criteria, such as the number of contributors and their contributions, the diversity of programming
+languages used, the relevance of the GitHub platform and its current relevance. Both recently created projects and those with a long history
+have been included, in order to provide a more complete and representative view of the current state of open source.
+\\Using the tool developed, interesting data has been collected, such as the programming language used, the author and date of creation of each
+line of code, as well as the number of revisions of each file. Once the data was collected, it was filtered and inserted into a relational database
+organised into three tables: \textit{Repositories}, \textit{Files} and \textit{Code}. In order to achieve the objective of this project, various
+metrics and indexes have been developed that allow a statistical analysis of the data to be carried out. This methodology has been applied to the
+information collected, and the results of the analysis have been represented graphically, facilitating the understanding of the evolution of the
+projects throughout their version history, and providing a clear vision of the trends and patterns that may exist.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,7 +296,7 @@ al proyecto, el análisis de su evolución a lo largo del tiempo y la correlaci�
 que demuestren que la longevidad y el mantenimiento del código son heterogéneos y varían entre los diferentes componentes de varios proyectos.
 \\Por lo que, el objetivo del proyecto consiste en estudiar la evolución y propiedades de varios proyectos de software libre a través del estudio
 empírico, y en aplicar un análisis estadístico de su código fuente.
-Se estudia el comportamiento de los proyectos FOSS\footnote{Free/Open Source Software}  más relevantes en GitHub, se identifican las fuentes de datos que ofrecen de manera pública y se presenta
+Se estudia el comportamiento de los proyectos FOSS\footnote{Free/Open Source Software} más relevantes en GitHub, se identifican las fuentes de datos que ofrecen de manera pública y se presenta
 una metodología para el análisis de los datos extraidos, que nos aportan datos interesantes a la investigación basados en la cantidad de colaboradores
 o en los lenguajes de programación más utilizados.
 De esta manera, podemos conocer mejor el fenómeno del software libre, el proceso de creación de software y cómo se puede aplicar en cualquier
@@ -789,7 +819,7 @@ Tras la recopilación, revisión y limpieza de datos, se procede a la interpreta
 complejidad que desarrolla, etc. Se realizan distintos análisis estadísticos tanto para el conjunto de todos los proyectos, como para cada uno de ellos de manera individual.
 En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de software libre alojados en GitHub, y se les han aplicado las métricas que se presentan en los siguientes apartados.
 
-\subsubsection{Lenguajes de programación más utilizados}
+\subsubsection{Lenguajes de programación en uso}
 \label{subsubsec:lenguajes}
 
 Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo un cálculo con todos los archivos de los repositorios analizados se obtienen los porcentajes de los lenguajes
@@ -888,7 +918,7 @@ Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejem
 \section{Interpretación de los resultados} 
 \label{sec:interpretación-resultados}
 
-\subsection{Lenguajes de programación más utilizados}
+\subsection{Lenguajes de programación en uso}
 \label{subsec:lenguajes}
 
 \subsection{Estabilidad del código}
@@ -912,40 +942,92 @@ Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejem
 \chapter{Conclusiones}
 \label{chap:conclusiones}
 
+En este capítulo, se revisan los objetivos alcanzados y se abordan los problemas surgidos durante el desarrollo del proyecto. Además, se realiza una
+reflexión sobre los conocimientos adquiridos tanto en este proyecto como a lo largo de mi formación académica, destacando su importancia para el
+desarrollo del mismo. Como cierre a este capitulo, se presentan propuestas de mejoras futuras con el fin de perfeccionar y aumentar las funcionalidades
+del programa desarrollado, lo que permitirá realizar un análisis más exhaustivo y enriquecer los resultados obtenidos.
 
 \section{Consecución de objetivos}
 \label{sec:consecucion-objetivos}
 
-Esta sección es la sección espejo de las dos primeras del capítulo de objetivos, donde se planteaba el objetivo general y se elaboraban los específicos.
-Es aquí donde hay que debatir qué se ha conseguido y qué no. 
-Cuando algo no se ha conseguido, se ha de justificar, en términos de qué problemas se han encontrado y qué medidas se han tomado para mitigar esos problemas.
-Y si has llegado hasta aquí, siempre es bueno pasarle el corrector ortográfico, que las erratas quedan fatal en la memoria final.
-Para eso, en Linux tenemos aspell, que se ejecuta de la siguiente manera desde la línea de \emph{shell}:
-
-\begin{verbatim}
-  aspell --lang=es_ES -c memoria.tex
-\end{verbatim}
+Teniendo en cuenta los resultados obtenidos y el análisis realizado, se puede concluir que los objetivos específicos de este Trabajo de Fin de Grado, establecidos
+en el capítulo 2, se han cumplido de manera satisfactoria. Se ha llevado a cabo una exhaustiva investigación sobre los repositorios alojados en GitHub, identificando
+y seleccionando aquellos que resultan más relevantes para nuestra investigación, teniendo en cuenta su relevancia dentro de la plataforma y otros datos de interés para
+su análisis posterior. Se ha desarrollado un proyecto de programación en Python que permite analizar el contenido de un repositorio, estudiando sus posibles limitaciones
+y explorando en profundidad la utilidad del comando \textit{git blame}. Se han abordado y solucionado diversas restricciones relacionadas con algunos archivos o funcionalidades,
+aportando al código más robustez. También se han solucionado problemas en relación al tamaño de la base de datos, puesto que se han encontrado dificultades al analizar 
+repositorios de gran tamaño. Tras esto, se ha llevado a cabo una recopilación de los datos que resultan útiles para llevar a cabo un análisis estadístico, realizando un
+procesado de los mismos para su posterior inserción en una base de datos. A partir de esta base de datos, se realiza una extracción de datos, evaluación e interpretación
+de los mismos, presentando los resultados obtenidos de manera gráfica.
+\\Con todo ello, se concluye que se ha logrado el objetivo general del proyecto, que consiste en estudiar la evolución de proyectos FOSS\footnote{Free/Open Source Software}
+ alojados en GitHub, obteniendo una comprensión integral de los cambios realizados a lo largo del tiempo, así como posibles patrones o tendencias  presentes en el código libre.
 
 \section{Aplicación de lo aprendido}
 \label{sec:aplicacion}
 
-Aquí viene lo que has aprendido durante el Grado/Máster y que has aplicado en el TFG/TFM.
-Una buena idea es poner las asignaturas más relacionadas y comentar en un párrafo los conocimientos y habilidades puestos en práctica.
+La aplicacion de los conocimientos y habilidades adquiridos durante mi formación académica en el Grado en Ingeniería en Sistemas Audiovisuales y Multimedia ha sido esencial para
+la elaboración de este Trabajo de Fin de Grado. A continuación, se mencionan los aprendizajes que me permitieron llevar a cabo la extracción, tratamiento y clasificación de datos
+para obtener como resultado el análisis de este proyecto.
 
+\begin{itemize}
+  \item \textbf{Informática I}. Esta asignatura fue mi primer contacto con el mundo de la programación. Me ha aportado conocimientos y habilidades para poder desarrollar mis primeros
+  programas sencillos de manera efectiva, adquiriendo así las bases de la programación. 
+  \item \textbf{Informática II}. Aparte de reforzar las bases de programación adquiridas, esta asignatura me ha aportado una nueva visión sobre los algoritmos y estructuras adaptados
+  a los requisitos del software de comunicaciones. Además, al desarrollarse en el lenguaje de Python, me ha servido para adquirir mis primeros conocimientos del mismo.
+  \item \textbf{Protocolos para la Transmisión de Audio y Vídeo en Internet}. En esta asignatura he seguido aprendiendo los conocimientos del lenguaje de programación Python, que han sido
+  fundamentales para llevar a cabo el desarrollo de los scripts realizados en este proyecto. 
+  \item \textbf{Estadística para Sistemas Audiovisuales}. Gracias a esta asignatura he adquirido la capacidad de definir modelos probabilísticos para resolver problemas de ingeniería.
+  Por lo que he adquirido conocimientos de probabilidad y estadística que me han servido de utilidad en el proceso del análisis estadístico del proyecto.
+\end{itemize}
 
 \section{Lecciones aprendidas}
 \label{sec:lecciones_aprendidas}
 
-Aquí viene lo que has aprendido en el Trabajo Fin de Grado/Máster.
+Durante la realización de este Trabajo de Fin de Grado, he tenido la oportunidad de adquirir diversos conocimientos sobre las herramientas utilizadas en un proyecto de análisis o minería
+de datos, muchos de los cuales no había explorado con anterioridad ni durante mi formación académica. A continuación, se mencionan algunos de los aprendizajes más significativos que he
+obtenido:
 
+\begin{itemize}
+  \item \textbf{Python}. La realización de este proyecto me ha permitido un mayor conocimiento de este lenguaje de programación, obteniendo nuevas habilidades
+  y mejorando así mis capacidades para el desarrollo de código. Además, he adquirido conocimientos en muchas de las librerías que utiliza, como por ejemplo \textit{subprocess} o
+  \textit{matplotlib}, observando las posibilidades de desarrollo que nos aportan.
+  \item \textbf{GitHub}. He entendido con mayor claridad el funcionamiento de la plataforma, así como del historial de revisiones. Además, he adquirido conocimientos
+  sobre los distintos repositorios que se pueden encontrar en GitHub, ya que podemos observar repositorios muy diferentes y a su vez con grandes funcionalidades.
+  \item \textbf{MySQL}. Dado que no tenía conocimientos acerca de bases de datos, he aprendido el significado de las mismas, centrándome en una base de datos relacional y
+  en la forma en qué estructura los datos. Por lo que he aprendido a gestionar una base de datos relacional, llevando a cabo distintas tareas tanto de inserción como de
+  extracción de datos.
+  \item \textbf{LaTex}. Otro conocimiento nuevo aprendido ha sido el sistema de composición de textos denominado LaTex. Su aprendizaje no ha sido muy costoso, y me ha permitiendo
+  estructurar la memoria de mi Trabajo de Fin de Grado de manera clara y organizada.
+\end{itemize}
+
+Otro ámbito donde he adquirido gran aprendizaje ha sido en mis aptitudes para realizar un proyecto de minería de datos. Este proyecto me ha permitido aumentar mi capacidad de análisis y de investigación,
+sabiendo elegir y clasificar los repositorios y/o datos más importantes para utilizar en nuestro proyecto, y realizando un descarte de aquellos que no van a ser útiles para nuestro objetivo.
+También he aprendido a desarrollar un proyecto de estas dimensiones, estructurando de manera clara toda la información a exponer y organizando las tareas y los tiempos de manera adecuada.
+Otro aprendizaje a destacar es la resolución de problemas, puesto que he podido solventar distintos inconvenientes tanto del código como de la base de datos, haciendo posible la realización
+final del proyecto.
+Por último, cabe destacar mi aprendizaje redactando la información de este proyecto, desarrollando conceptos técnicos de la manera más clara posible, con el objetivo de un fácil entendimiento
+de cara a posibles mejoras por diversos contribuidores en el futuro.
 
 \section{Trabajos futuros}
 \label{sec:trabajos_futuros}
 
-Ningún proyecto ni software se termina, así que aquí vienen ideas y funcionalidades que estaría bien tener implementadas en el futuro.
+Dado que ningún proyecto ni software se termina de manera definitiva, en esta sección se mencionan posibles ideas o mejoras que pueden implementarse en el futuro para adquirir un proyecto más
+robusto y/o con nuevas funcionalidades.
 
-Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
+\begin{itemize}
+  \item \textbf{Estudio de un código de programación concreto}. Nuestro proyecto tiene en cuenta todos los posibles lenguajes de programación que se pueden encontrar en los repositorios alojados
+  en GitHub, sin embargo podríamos modificar el programa de manera que solo tuviera en cuenta un lenguaje de programación en concreto. De esta forma, se podría estudiar la evolución de este lenguaje 
+  a lo largo de los años, observando si tiene gran presencia en la plataforma o si se encuentra obsoleto frente a otros.
+  \item \textbf{Evolución de las versiones de un mismo proyecto}. Un análisis que resulta interesante consiste en estudiar la evolución de las distintas versiones de un mismo proyecto a lo largo de los años.
+  Se podría observar en que período de tiempo se ha dejado de desarrollar una versión antigua frente a la más nueva, así como si se comparten colaboradores entre versiones o si se da el caso contrario.
+  \item \textbf{Estudio de proyectos de grandes dimensiones}. Estudiar la evolución de proyectos de gran relevancia conlleva enfrentarse a proyectos de grandes dimensiones, para los cuales tendríamos
+  que aumentar la capacidad de la base de datos o incorporar múltiples bases de datos. Resolver los problemas que podamos encontrarnos y realizar mejoras para conseguir este objetivo resultaría muy
+  interesante para estudiar proyectos que se encuentran en auge en la actualidad o que siempre han sido de vital importancia en el mundo de la programación. Además, esto ofrecería una mayor flexibilidad
+  y escalabilidad al sistema.
+\end{itemize}
 
+En resumen, este proyecto se plantea como una apertura a distintos estudios o implementaciones futuras, debido a que no se han desarrollado muchas investigaciones acerca de proyectos de código libre 
+y abierto que utilicen un sistema de control de versiones.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
