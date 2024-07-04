@@ -627,11 +627,10 @@ En la figura~\ref{fig:funcionamiento} se presenta un diagrama de funcionamiento 
 \\Tras esto, se ejecuta el script \texttt{git\_blameall.py} con la finalidad de analizar línea a línea el código de cada archivo, recopilando diversos datos que se almacenan en varias tablas de la base de datos.
 \\Finalmente, se ejecuta el script \texttt{graphics.py} con el objetivo de generar distintas gráficas que muestran los resultados de los análisis estadísticos y la aplicación de las métricas estudiadas previamente.
 
-
 \section{Arquitectura específica} 
 \label{sec:arquitectura-especifica}
 
-En esta sección, vamos a centrarnos en describir más a fondo el funcionamiento de cada uno de los scripts que conforman nuestro proyecto.
+En esta sección, se procede a describir más a fondo el funcionamiento de cada uno de los scripts que conforman nuestro proyecto.
 
 \subsection{Programa inicial}
 \label{subsec:programa-inicial}
@@ -641,11 +640,11 @@ Se ejecuta a partir de la URL de un repositorio de GitHub, y entre sus diversas 
 programa principal. Sus funciones de manejo son las siguientes:
 
 \begin{itemize}
-  \item \texttt{request\_url()}. Al ejecutar el programa se pide introducir la URL de un repositorio de GitHub, a partir de la cual podemos obtener distintos parámetros de interés para nuestro proyecto. Se obtienen los valores del protocolo y procedencia del
-  repositorio, de manera que mediante la función \texttt{check\_url()} se comprueba que se utilice un protocolo 'https' y que el repositorio elegido sea propio de GitHub. Estos parámetros, junto con el usuario y el nombre del repositorio, nos permiten clonar
-  el repositorio en nuestro directorio mediante la librería \textit{subprocess} en la función \texttt{run\_url()}. Esta función además, ejecuta las las funciones \texttt{get\_directory()} y esta a su vez la función \texttt{get\_path()}, que como el propio nombre
-  indica obtienen el nombre del directorio y la ruta absoluta del directorio en cuestión. Se ha utilizado una ruta absoluta frente a una relativa porque nos aporta claridad para evitar conflictos entre directorios ambiguos dentro del mismo repositorio, además de
-  proporcionarnos independencia frente al lugar en el que se ejecute el script.
+  \item \texttt{request\_url()}. Al ejecutar el programa se pide introducir la URL de un repositorio de GitHub, mediante la cual podemos clonar el repositorio en nuestro directorio. De esta URL, se obtienen los valores del protocolo y procedencia del
+  repositorio, de manera que mediante la función \texttt{check\_url()} se comprueba que se utilice un protocolo 'https' y que el repositorio elegido sea propio de GitHub. Estos parámetros, junto con el nombre de usuario y del repositorio, nos permiten clonar
+  el repositorio en nuestro directorio mediante la librería \textit{subprocess} con la función \texttt{run\_url()}. Esta función además, ejecuta la función \texttt{get\_directory()}, y ésta a su vez la función \texttt{get\_path()}, que como el propio nombre
+  indica obtienen el nombre del directorio y la ruta absoluta del directorio propio al repositorio clonado. Se ha utilizado una ruta absoluta frente a una relativa porque aporta claridad para evitar conflictos entre directorios ambiguos dentro del mismo repositorio,
+  además de proporcionar independencia frente al lugar en el que se ejecute el script.
 
   \item \texttt{remove\_excluded()}. La finalidad de esta función consiste en clasificar archivos o directorios que no pueden ser soportados por el comando \textit{git blame} para ser posteriormente eliminados del repositorio clonado, por lo que 
   se descartan los archivos que tienen las siguientes extensiones [".png", ".jpg", ".jpeg", ".gif", ".pdf", ".exe", ".dll", ".ico", ".db", ".dat", ".class", ".o", ".pyc", ".mp3", ".mp4", ".wav", ".avi", ".bak", ".tmp", ".docx", ".pptx", ".zip",
@@ -657,28 +656,28 @@ programa principal. Sus funciones de manejo son las siguientes:
 
   \item \texttt{remove\_empty\_files()}. Esta función tiene como finalidad eliminar archivos vacíos que se puedan encontrar en el directorio que se corresponde con el repositorio clonado, así como en todos sus subdirectorios.
   Toma como parámetro dicho directorio, y crea una lista inicialmente vacía que se utiliza para almacenar los nombres de los archivos eliminados. Mediante \texttt{os.walk()} se realiza un recorrido por todo el árbol del repositorio
-  clonado e itera cada uno de sus archivos, para calcular su tamaño en bytes con el comando \texttt{os.path.getsize()}, y en caso de ser 0 se clasifica como un archivo vacío, y por lo tanto, se elimina mediante la función \texttt{os.remove()}
-  y se añade a la lista de archivos eliminados. Finalmente, con la información incluida en la lista inicial, obtenemos información acerca de que cantidad de archivos se han eliminado y de cuales son sus rutas y nombres respectivamente.
+  clonado e itera cada uno de sus archivos, para calcular su tamaño en bytes con el comando \texttt{os.path.getsize()}, y en caso de ser 0, se clasifica como un archivo vacío, y por lo tanto, se elimina mediante la función \texttt{os.remove()}
+  y se añade a la lista de archivos eliminados. Finalmente, con la información incluida en la lista inicial, obtenemos información por pantalla acerca de que cantidad de archivos se han eliminado, y de cuáles son sus rutas y nombres respectivamente.
   
   \item \texttt{detect\_encoding()}. Esta función es una parte muy importante del código, ya que permite solucionar problemas de codificación al enfrentarse a cualquier tipo de archivo de datos. Tiene como objetivo adivinar el tipo de
   codificación del archivo pasado como parámetro, para ello realiza una lectura en bytes del archivo y mediante la librería \textit{chardet} detecta la codificación del archivo.
   
   \item \texttt{convert\_to\_utf8()}. Esta función tiene como finalidad convertir en un archivo codificado en UTF-8 cada archivo que no esté codificado como tal, usando como parámetros el nombre del archivo a codificar y el tipo de codificación de dicho archivo.
   Se realiza una lectura en la codificación detectada anteriormente del archivo correspondiente, y se almacena su contenido en una variable. Este contenido se escribe en un archivo temporal, para posteriormente mediante la función \texttt{os.replace()}
-  reescribir el archivo original con el contenido archivo temporal, realizando así una conversión a la codificación UTF-8 de manera segura. 
+  reescribir el archivo original con el contenido del archivo temporal, realizando así una conversión a la codificación UTF-8 de manera segura. 
 
   \item \texttt{get\_table1()}. A continuación, nos centramos en las tareas relacionadas con la base de datos. La primera tarea consiste en verificar la existencia de la base de datos que vamos a utilizar, esto se ha podido comprobar a través de la conexión a una base de datos
-  \textit{'master'}, la cual nos proporciona la información necesaria, y en caso de que la base de datos denominada 'Analysis\_Github\_Repository' no exista, se procede a crearla. El paso siguiente consiste en crear la tabla denominada '\textit{Repositories}', previa comprobación de su existencia.
-  \\Siguiendo en el ámbito de las bases de datos, utilizando la función \texttt{get\_table2()} se crea la tabla denominada 'Files' con las verificaciones necesarias y con una conexión previamente establecida a la base de datos 'Analysis\_Github\_Repository'.
+  \textit{'master'}, la cual nos proporciona la información necesaria, y en caso de que la base de datos denominada 'Analysis\_Github\_Repository' no exista, se procede a crearla. El paso siguiente consiste en crear la tabla denominada \textit{Repositories}, previa comprobación de su existencia.
+  \\Siguiendo en el ámbito de las bases de datos, utilizando la función \texttt{get\_table2()} se crea la tabla denominada \textit{Files} con las verificaciones necesarias y con una conexión previamente establecida a la base de datos \textit{Analysis\_Github\_Repository}.
 
   \item \texttt{read\_directory()}. Esta función es la más importante de todo el script, ya que integra y unifica la mayoria de las funciones descritas anteriormente. En primer lugar, toma como parámetro el nombre del directorio que se va a analizar y crea una lista con todos sus archivos y subdirectorios.
-  De esta lista, descarta el directorio '.git' para el análisis pero teniendo en cuenta que no se puede eliminar, al contener información de vital importancia sobre el repositorio clonado, incluyendo su historial de commits, su configuración así como sus objetos. Tras esto, el procedimiento a seguir consiste
+  De esta lista, descarta el directorio '.git' para el análisis pero teniendo en cuenta que no se puede eliminar, al contener información de vital importancia sobre el repositorio clonado, incluyendo su historial de versiones, su configuración así como sus objetos. Tras esto, el procedimiento a seguir consiste
   en recorrer el árbol del repositorio, clasificando cada objeto de la lista según sea un archivo o un subdirectorio. 
-  \\En caso de ser un archivo, se construye y ejecuta el comando \textit{'git log'} para obtener el historial de commits del archivo. Si el comando falla, se imprime un mensaje de error y se continúa con el siguiente archivo, pero si el comando se ejecuta con éxito, se cuenta el número de commits del archivo, y 
+  \\En caso de ser un archivo, se construye y ejecuta el comando \textit{git log} para obtener el historial de versiones del archivo. Si el comando falla, se imprime un mensaje de error y se continúa con el siguiente archivo, pero si el comando se ejecuta con éxito, se cuenta el número de commits del archivo, y 
   en caso de tener un número de commits superior a 0, se ejecuta la función principal del script \texttt{git\_blameall.py}. Mientras tanto, se ejecutan las funciones relacionadas con la codificación original del archivo, y se convierte a UTF-8 en caso de ser necesario. Así como también se adivina el lenguaje de
   programación del archivo mediante la librería \textit{Pygments}. En caso de ser un subdirectorio, se muestra su nombre por pantalla y se invoca esta función recursivamente, con el objetivo de analizar todos los archivos del repositorio clonado.
-  \\Mediante una conexión a la base de datos se realiza la inserción de datos obtenidos en esta función. Primero se utiliza la función \texttt{insert\_repo\_data()}, que inserta en la tabla '\textit{Repositories}' el nombre del repositorio clonado así como su índice correspondiente. Posteriormente se ejecuta la función
-  \texttt{insert\_files\_data()} que se encarga de insertar en la tabla 'Files' el nombre, ruta, ID y número de commits de cada archivo respectivamente. También se ejecuta la función \texttt{insert\_files\_language()}, que inserta el lenguaje de cada archivo dentro de la tabla 'Files'.
+  \\Mediante una conexión a la base de datos se realiza la inserción de datos obtenidos en esta función. Primero se utiliza la función \texttt{insert\_repo\_data()}, que inserta en la tabla \textit{Repositories} el nombre del repositorio clonado así como su índice correspondiente. Posteriormente se ejecuta la función
+  \texttt{insert\_files\_data()} que se encarga de insertar en la tabla \textit{Files} el nombre, ruta, ID y número de revisiones de cada archivo respectivamente. También se ejecuta la función \texttt{insert\_files\_language()}, que inserta el lenguaje de cada archivo dentro de la tabla \textit{Files}.
 \end{itemize}
 
 \subsection{Programa principal}
@@ -689,33 +688,35 @@ analizar la evolución del repositorio. Sus funciones de manejo son las siguient
 \begin{itemize}
   \item \texttt{parse\_chunk\_header()}. En el contexto de Git y las diferencias (\textit{diffs}) entre un archivo, un \textit{chunk} se corresponde con la sección de un archivo que ha cambiado entre dos revisiones, por lo que esta es la forma que tiene Git de mostrar las posibles diferencias. Cada \textit{chunk} 
   contiene una cabecera que indica dónde se encuentra el cambio realizado y cuántas líneas se han añadido y/o eliminado, y también las líneas de código modificadas con prefijos que indican respectivamente si la línea ha sido añadida o eliminada.
-  \\Esta función analiza la cabecera del \textit{chunk} con el objetivo de extraer información sobre las líneas afectadas. Se obtiene una lista con los valores del número de la línea inicial en la versión original del archivo donde comienza el cambio (\textit{'origL'}), el número de líneas eliminadas en la versión original
-  del archivo (\textit{'del\_N'}), el número de la línea inicial en la nueva versión del archivo donde comienza el cambio (\textit{'newL'}) y el número de líneas añadidas en la nueva versión del archivo (\textit{'add\_N'}). En caso de que no se puedan obtener los valores de (\textit{'del\_N'}) o (\textit{'add\_N'}), serán
+  \\Esta función analiza la cabecera del \textit{chunk} con el objetivo de extraer información sobre las líneas afectadas. Se obtiene una lista con los valores del índice de la línea inicial en la versión original del archivo donde comienza el cambio (\textit{origL}), el número de líneas eliminadas en la versión original
+  del archivo (\textit{del\_N}), el índice de la línea inicial en la nueva versión del archivo donde comienza el cambio (\textit{newL}) y el número de líneas añadidas en la nueva versión del archivo (\textit{add\_N}). En caso de que no se puedan obtener los valores de (\textit{del\_N}) o (\textit{add\_N}), serán
   considerados '1' por defecto. En conclusión, esta función nos retorna las posiciones y números de líneas afectadas.
   
   \item \texttt{get\_initial\_version()}. El objetivo de esta función consiste en obtener el contenido inicial de un archivo en una revisión específica de Git, toma como parámetros el \textit{hash} de la primera revisión del archivo y el nombre del archivo en cuestión. Cuando se habla de \textit{hash} se refiere al identificador
-  de cada revisión/commit realizada sobre el archivo. Teniendo en cuenta estos parámetros construye el comando \textit{git show} y se ejecuta, obteniendo como salida el contenido inicial del archivo, que almacena línea a línea en la lista \textit{lines}.
+  de cada revisión/commit realizada sobre el archivo. Teniendo en cuenta estos parámetros, construye el comando \textit{git show} y se ejecuta, obteniendo como salida el contenido inicial del archivo, que almacena línea a línea en la lista \textit{lines}.
 
   \item \texttt{find\_index()}. Esta función tiene como parámetros una lista con todas las líneas del archivo inicial, cada una de ellas con su información correspondiente, además del número de líneas que se deben de avanzar desde la línea de referencia. El procedimiento de la función se basa en recorrer una a una las líneas que
   permanecen en la actualidad (vivas) hasta que el número de líneas a avanzar sea 0, teniendo en cuenta que se considera una línea viva aquella que no tiene una fecha de fin y que fue introducida en una revisión distinta a la actual. Tiene como objetivo encontrar el índice correcto de la posición donde se debe de insertar o eliminar
   alguna línea.
     
   \item \texttt{main()}. Esta es la función más importante de todo el script, donde se integran todas las anteriores. Tiene como objetivo analizar todas las revisiones de un archivo de un repositorio de Git y registrar información sobre los cambios producidos en una base de datos SQL Server. En primer lugar, construye y ejecuta
-  el comando \textit{git rev-list}, obteniendo como salida una variable denominada \textit{hashes} con todas las revisiones que ha sufrido ese archivo y sus respectivos identificadores, ordenadas cronológicamente de la más antigua a la más actual. Seguidamente ejecuta el comando \textit{git log} para obtener las fechas y los autores
+  el comando \textit{git rev-list}, obteniendo como salida una variable denominada \textit{hashes} con todas las revisiones que ha sufrido ese archivo y sus respectivos identificadores, ordenadas cronológicamente de la más antigua a la más actual. Seguidamente, ejecuta el comando \textit{git log} para obtener las fechas y los autores
   de cada una de las revisiones, que se guardan en la variable \textit{date\_author}. Realiza la comprobación de que el número de revisiones obtenido coincida con la longitud de \textit{date\_author}, y crea una lista de objetos \textit{struct} denominada \textit{revs} que contiene la información de cada revisión de la siguiente manera:
    (hash, fecha, autor). Según el procesamiento de líneas indicado, recorre cada línea de código de la versión inicial del archivo, y se guardan en la lista \textit{ALL\_LINES} como objetos de tipo \textit{struct}.
    \\Una vez que se ha obtenido la versión inicial del archivo, se procesa cada una de sus revisiones desde la más reciente hasta la más antigua. Se utiliza el comando \textit{git diff} para obtener las posibles diferencias entre revisiones, y se procesa cada una de sus líneas resultantes en función del tipo de línea obtenida: si es una
-   cabecera de chunk (\textit{'@@'}), se extrae la información correspondiente sobre el chunk llamando a la función \texttt{parse\_chunk\_header()}, y si es una línea eliminada (\textit{'-'}) o añadida (\textit{'+'}), encuentra el índice correspondiente en \textit{ALL\_LINES} usando la función \texttt{find\_index()}, verifica la modificación
+   cabecera de chunk (\textit{@@}), se extrae la información correspondiente sobre el chunk llamando a la función \texttt{parse\_chunk\_header()}, y si es una línea eliminada (\textit{-}) o añadida (\textit{+}), encuentra el índice correspondiente en \textit{ALL\_LINES} usando la función \texttt{find\_index()}, verifica la modificación
     en la revisión actual e inserta los cambios en la base de datos. También se insertan en la base de datos las líneas vivas que se encuentran en la versión más actual, es decir, las líneas que no se han modificado nunca desde la versión inicial del archivo.
     \\En conclusión, esta función se centra en guardar las líneas que han sufrido cambios durante las revisiones así como aquellas que no se han cambiado desde la versión inicial.
 
-  \item \texttt{print\_so\_far()}. La finalidad de esta función es manejar la conexión con la base de datos, verificar y crear la tabla 'Code' en caso de que no exista, e insertar cada una de las líneas mencionadas anteriormente en esta tabla.
+  \item \texttt{print\_so\_far()}. La finalidad de esta función es manejar la conexión con la base de datos, verificar y crear la tabla \textit{Code} en caso de que no exista, e insertar cada una de las líneas mencionadas anteriormente en esta tabla.
 \end{itemize}
 
 \subsection{Obtención de gráficos}
 \label{subsec:programa-graficos}
 
--- EXPLICACIÓN GRÁFICOS ---
+La obtención de gráficos se consigue con la ejecución del script \texttt{graphics.py}. Realizando consultas a la base de datos obtengo los datos necesarios en cada caso para poder aplicar las métricas e índices correspondientes. Tras esto, y con ayuda
+de la librería \textit{matplotlib}, se obtienen los resultados y se interpretan de manera gráfica.
+\\Este script tiene varias funciones para obtener distintas gráficas, las cuales se desarrollan de manera muy mecánica puesto que siguen el mismo procedimiento.
 
 \section{Fases del proyecto} 
 \label{sec:fases-proyecto}
@@ -755,7 +756,7 @@ almacenamiento:
   \item \textit{File\_ID}. Al igual que cada repositorio se identifica con su propio ID, se hará lo mismo con cada archivo. De manera que se puedan clasificar las líneas de código pertenecientes a un archivo concreto.
   \item \textit{File\_Name}. Este valor se corresponde con el nombre del archivo que se va a analizar.
   \item \textit{File\_Path}. Este campo se corresponde con la ruta donde se encuentra el archivo que se está analizando, de manera que se pueda localizar en el repositorio clonado.
-  \item \textit{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la librería {Pygments}, clasificandose como 'Archivo de datos' aquel
+  \item \textit{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la librería \textit{Pygments}, clasificandose como 'Archivo de datos' aquel
   archivo al que no se le ha podido identificar su lenguaje de programación, y que puede almacenar diversos datos como texto plano, datos binarios, etc. 
   \item \textit{Commits}. Este dato se corresponde con el número de revisiones que se ha realizado sobre el archivo que se está analizando. Cada 'commit' se corresponde con la acción que se realiza para guardar los cambios realizados en los archivos de 
   un repositorio. El conjunto de todos estos 'commits' forman el historial de revisiones de cada repositorio, por lo que el número de commits o revisiones nos puede indicar la frecuencia de actualizaciones de un proyecto.
@@ -785,7 +786,7 @@ de las operaciones realizadas sobre los datos de manera que todos los cambios se
 \\Las bases de datos relacionales se caracterizan por utilizar el lenguaje de consulta SQL, por lo que también se denominan bases de datos SQL. Mediante este lenguaje se realizan las operaciones básicas de interacción con la base de datos, definiendo a continuación las que han sido
 utilizadas en este proyecto:
 \begin{itemize}
-  \item \textit{CREATE DATABASE}. Se corresponde con la sentencia utilizada para crear la base de datos '\textit{Analysis\_GitHub\_Repository}'.
+  \item \textit{CREATE DATABASE}. Se corresponde con la sentencia utilizada para crear la base de datos \textit{Analysis\_GitHub\_Repository}.
   \item \textit{CREATE TABLE}. Como el propio nombre indica, esta sentencia o query se utiliza para crear una tabla dentro de la base de datos. Se deben de especificar los campos que contenga la tabla, así como sus tipos, sus claves primarias o foráneas, o incluso se pueden restringir
   algunos campos para que sean válidos o no los valores \textit{NULL}.
   \item \textit{INSERT INTO}. Esta sentencia se utiliza para insertar valores en una tabla existente en la base de datos. Se deben de especificar los valores a insertar y el propio nombre de la tabla.
@@ -793,9 +794,9 @@ utilizadas en este proyecto:
   en caso de ya estar creada. Por otro lado, se utiliza esta sentencia para obtener distintos datos de las tablas de la base de datos, en función de los campos que consideremos necesarios para calcular la métrica correspondiente y representar su respectivo gráfico resultante.
 \end{itemize}
 
-\\En la figura~\ref{fig:entidad-relacion}, se observa un diagrama de entidad relación (DER) que consiste en una herramienta para representar de manera simplificada cómo se ha organizado la información de la base de datos '\textit{Analysis\_GitHub\_Repository}'. Esta base de datos se compone de tres tablas
-distintas denominadas '\textit{Repositories}', '\textit{Files}' y '\textit{Code}'. De la tabla '\textit{Repositories}' se establece una relación de uno a muchos, puesto que dentro de un repositorio se organizan diversos archivos, por lo que la clave primaria del ID correspondiente
-al repositorio pasa a ser la clave foránea de la tabla '\textit{Files}'. Sucede lo mismo desde la tabla '\textit{Files}' hacia la tabla '\textit{Code}', ya que de un archivo se obtienen múltiples líneas de código, por lo que la clave primaria del ID correspondiente a cada archivo
+\\En la figura~\ref{fig:entidad-relacion}, se observa un diagrama de entidad relación (DER) que consiste en una herramienta para representar de manera simplificada cómo se ha organizado la información de la base de datos \textit{Analysis\_GitHub\_Repository}. Esta base de datos se compone de tres tablas
+distintas denominadas \textit{Repositories}, \textit{Files} y \textit{Code}. De la tabla \textit{Repositories} se establece una relación de uno a muchos, puesto que dentro de un repositorio se organizan diversos archivos, por lo que la clave primaria del ID correspondiente
+al repositorio pasa a ser la clave foránea de la tabla \textit{Files}. Sucede lo mismo desde la tabla \textit{Files} hacia la tabla \textit{Code}, ya que de un archivo se obtienen múltiples líneas de código, por lo que la clave primaria del ID correspondiente a cada archivo
 pasa a ser la clave foránea en la siguiente tabla.
 
 \begin{figure}
@@ -809,14 +810,14 @@ pasa a ser la clave foránea en la siguiente tabla.
 \subsection{Procesado de datos}
 \label{subsec:procesado}
 
-Una vez recogidos y almacenados los datos, se realiza el preprocesamiento para prepararlos para el análisis. Esto puede implicar limpieza de datos (eliminación de valores atípicos, datos faltantes), normalización o estandarización de variables, selección de características relevantes y
+Una vez recogidos y almacenados los datos, se realiza el procesamiento para prepararlos para el análisis. Esto puede implicar limpieza de datos (eliminación de valores atípicos, datos faltantes), normalización o estandarización de variables, selección de características relevantes y
 transformación de datos según sea necesario.
 Tenemos en cuenta diversas restricciones para que nuestro programa desarrolle su funcionamiento de manera eficiente. Teniendo en cuenta que el comando \textit{git blame} no es compatible con cualquier tipo de archivo, ajustamos el código
 de manera que se eliminen del repositorio clonado los archivos con las siguientes extensiones [".png", ".jpg", ".jpeg", ".gif", ".pdf", ".exe", ".dll", ".ico", ".db", ".dat", ".class", ".o", ".pyc", ".mp3", ".mp4", ".wav", ".avi", ".bak", ".tmp", ".docx", ".pptx", ".zip",
 ".tar.gz", ".rar"]. También se eliminan los directorios ["node\_modules", "vendor", "Pods"], que se corresponden con directorios donde se organizan y gestionan todas las dependencias del proyecto, como bibliotecas y módulos de terceros. Otra necesidad importante ha sido
 eliminar los archivos vacíos, es decir, aquellos que tienen un tamaño de 0 bytes. Estos archivos se utilizan comunmente para importar funciones y/o clases que se utilizan en otros módulos del proyecto, así como para marcar directorios como paquetes de Python, y producen errores
 en la ejecución del código al no disponer de líneas de código para analizar. El directorio '.git' también ha sido descartado para el análisis pero teniendo en cuenta que no se puede eliminar, ya que conserva toda la información acerca del historial de revisiones del repositorio.
-\\Una vez que se realiza el análisis, se ha tenido en cuenta un manejo de todos los archivos en la codificación UTF-8, ya que permite un mayor manejo y procesado de los datos, así como menor dependencia de la detección automática consiguiendo así un menor flujo de trabajo.
+\\Una vez que se procede al análisis del repositorio clonado, se ha tenido en cuenta un manejo de todos los archivos en la codificación UTF-8, ya que permite un mayor manejo y procesado de los datos, así como menor dependencia de la detección automática consiguiendo así un menor flujo de trabajo.
 Por lo que inicialmente se realiza una detección automática de la codificación de todos los archivos, pero con la finalidad de obtener cada uno de ellos en codificación UTF-8. Además, se han descartado líneas con más de 255 caracteres así como líneas en blanco, con la finalidad
 de evitar errores al insertar los datos en la tabla denominada 'Code'. 
 \\También se realiza un procesado de datos teniendo en cuenta posibles funcionalidades a implementar en el futuro. Por lo que se identifica que cada línea de código sea un comentario o no, así como también se realiza un cálculo del número de palabras que tiene cada línea.
@@ -833,9 +834,9 @@ En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de soft
 \subsubsection{Lenguajes de programación en uso}
 \label{subsubsec:lenguajes}
 
-Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo un cálculo con todos los archivos de los repositorios analizados se obtienen los porcentajes de los lenguajes
-de programación que tienen mayor presencia dentro de los proyectos de software libre y código abierto alojados en GitHub. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse
-con ningún lenguaje conocido se ha clasificado como un archivo que contiene datos en un formato específico definido por el software que lo utiliza, y se ha denominado '\textit{Archivo de datos}' o '\textit{Archivo binario}'.
+Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo un cálculo con todos los archivos del repositorio en cuestión, se obtienen los porcentajes de los lenguajes
+de programación que tienen mayor presencia dentro de cada proyecto. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse
+con ningún lenguaje conocido, se ha clasificado como un archivo que contiene datos en un formato específico definido por el software que lo utiliza, y se ha denominado 'Archivo de datos' o 'Archivo binario'.
 
 \[\text{Porcentaje} \, \text{Lenguaje_i} = \left( \frac{\text{Archivos} \, \text{lenguaje}_i}{\text{Total} \, \text{de} \, \text{archivos}} \right) \times 100\]
 
@@ -847,7 +848,7 @@ Esto puede aportar una estimación del esfuerzo de mantenimiento de cara a un fu
 hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar qué proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
 modificaciones en un período largo de tiempo, así como también se pueden observar proyectos con una tendencia de trabajo constante con la finalidad de mantener el proyecto actualizado.
 \\Entonces, se desarrollan dos métricas, una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra para obtener esta cantidad en porcentajes respecto al tamaño total
-del proyecto, y se aplican a cada uno de los repositorios analizados.
+del proyecto, y se aplican al total de repositorios analizados.
 
 \[\text{Cantidad} \, \text{de} \, \text{líneas} \, \text{vivas} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
 
@@ -860,8 +861,6 @@ del proyecto, y se aplican a cada uno de los repositorios analizados.
 Medir la estabilidad del código es posible gracias a una métrica denominada \textit{Tasa de Churn}. El análisis de esta métrica implica evaluar cuántas líneas de código han sido eliminadas en un período de tiempo específico.
 Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en este proyecto
 consiste en representar la \textit{tasa de Churn} por cada archivo de los repositorios analizados, de manera que se compruebe así que archivos del repositorio se encuentran más obsoletos.
-
-DUDA: APLICAR POR ARCHIVO O POR REPOS?¿?¿?
 
 \[\text{Tasa} \, \text{de} \, \text{Churn} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
 
@@ -883,7 +882,7 @@ Otro dato relevante consiste en conocer la cantidad de colaboradores de un proye
 a lo largo del tiempo puede indicar un proyecto en expansión y cada vez más relevante, así como el caso contrario se traduce en una reducción del interés o fases críticas del proyecto. En proyectos de código 
 abierto, el la colaboración de múltiples desarrolladores indica un signo de confianza y relevancia en la comunidad. Por otro lado, un número alto de colaboradores se traduce en una diversidad de contribuciones, que aportan
 diferentes perspectivas, habilidades y conocimientos, lo que puede conducir a un código más robusto con funcionalidades más variadas.
-\\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto a un repositorio concreto a lo largo del tiempo.
+\\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto al total de repositorios a lo largo del tiempo.
 
 \[\text{Número} \, \text{de} \, \text{colaboradores_i} = \sum_{i=1}^{n} \text{Colaboradores} \, \text{repositorio_i}\]
 
@@ -1026,15 +1025,18 @@ Dado que ningún proyecto ni software se termina de manera definitiva, en esta s
 robusto y/o con nuevas funcionalidades.
 
 \begin{itemize}
-  \item \textbf{Estudio de un código de programación concreto}. Nuestro proyecto tiene en cuenta todos los posibles lenguajes de programación que se pueden encontrar en los repositorios alojados
-  en GitHub, sin embargo podríamos modificar el programa de manera que solo tuviera en cuenta un lenguaje de programación en concreto. De esta forma, se podría estudiar la evolución de este lenguaje 
-  a lo largo de los años, observando si tiene gran presencia en la plataforma o si se encuentra obsoleto frente a otros.
+  \item \textbf{Estudio de un lenguaje de programación concreto}. Nuestro proyecto tiene en cuenta todos los posibles lenguajes de programación que se pueden encontrar en los repositorios alojados
+  en GitHub, sin embargo podríamos modificar el programa de manera que solo tuviera en cuenta un lenguaje de programación en concreto. De esta forma, se podría estudiar la evolución y presencia de 
+  este lenguaje en proyectos de código libre a lo largo de los años, observando si tiene relevancia en la plataforma o si se encuentra obsoleto frente a otros.
   \item \textbf{Evolución de las versiones de un mismo proyecto}. Un análisis que resulta interesante consiste en estudiar la evolución de las distintas versiones de un mismo proyecto a lo largo de los años.
   Se podría observar en que período de tiempo se ha dejado de desarrollar una versión antigua frente a la más nueva, así como si se comparten colaboradores entre versiones o si se da el caso contrario.
   \item \textbf{Estudio de proyectos de grandes dimensiones}. Estudiar la evolución de proyectos de gran relevancia conlleva enfrentarse a proyectos de grandes dimensiones, para los cuales tendríamos
   que aumentar la capacidad de la base de datos o incorporar múltiples bases de datos. Resolver los problemas que podamos encontrarnos y realizar mejoras para conseguir este objetivo resultaría muy
   interesante para estudiar proyectos que se encuentran en auge en la actualidad o que siempre han sido de vital importancia en el mundo de la programación. Además, esto ofrecería una mayor flexibilidad
   y escalabilidad al sistema.
+  \item \textbf{Estudio de estructuras más utilizadas}. Puesto que se ha realizado un contador del número de palabras de cada línea de código, esto puede abrir puertas a un nuevo proyecto donde se estudie la
+  presencia en mayor o menor grado de diversas estructuras. De esta manera, se puede estudiar la cantidad de veces que se utilizan listas o diccionarios en un archivo concreto, así como la presencia de
+  sentencias de tipo If/Else o bucles. 
 \end{itemize}
 
 En resumen, este proyecto se plantea como una apertura a distintos estudios o implementaciones futuras, debido a que no se han desarrollado muchas investigaciones acerca de proyectos de código libre 
