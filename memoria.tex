@@ -916,7 +916,7 @@ términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
 
 Otro dato relevante consiste en conocer la cantidad de colaboradores de un proyecto a lo largo de los años. Esto puede reflejar el crecimiento y la madurez del proyecto, ya que un aumento del número de desarrolladores
 a lo largo del tiempo puede indicar un proyecto en expansión y cada vez más relevante, así como el caso contrario se traduce en una reducción del interés o fases críticas del proyecto. En proyectos de código 
-abierto, el la colaboración de múltiples desarrolladores indica un signo de confianza y relevancia en la comunidad. Por otro lado, un número alto de colaboradores se traduce en una diversidad de contribuciones, que aportan
+abierto, la colaboración de múltiples desarrolladores indica un signo de confianza y relevancia en la comunidad. Por otro lado, un número alto de colaboradores se traduce en una diversidad de contribuciones, que aportan
 diferentes perspectivas, habilidades y conocimientos, lo que puede conducir a un código más robusto con funcionalidades más variadas.
 \\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto al total de repositorios a lo largo de los años.
 
@@ -985,8 +985,19 @@ muestran datos interesantes que reflejan el propósito final de este proyecto.
 \subsection{Frecuencia de cambios}
 \label{subsec:commits}
 
-La figura ~\ref{fig:grafica-commits} muestr graficamente la evolución del número de commits en cada uno de los repositorios seleccionados a lo largo de los años. En el eje X, s
-observa un avance desde el 2008 hasta la actualidad, siendo del 2016 hasta el 2024 el período de mayor actividad
+La figura ~\ref{fig:grafica-commits} muestra graficamente la evolución del número de commits en cada uno de los repositorios seleccionados a lo largo de los años. Se observa una etapa de
+desarrollo desde el año 2008 hasta la actualidad, siendo del año 2016 hasta el año 2024 el período de mayor actividad.
+\\Como se puede observar, el repositorio \textit{notebook} se corresponde con el proyecto más longevo, ya que comenzó a desarrollarse en el año 2008 y sigue vigente en la actualidad.
+Se identifica con un desarrollo constante pero con períodos de baja actividad, no ha sufrido su mayor etapa de desarrollo hasta el año 2019, donde tiene varios períodos intensos de actividad,
+siendo el año 2023 el más destacable.
+Por otra parte, el repositorio \textit{code-edit} se corresponde con el proyecto más nuevo, compartiendo su mayor período de actividad con el año de su creación, que se corresponde con el año 2022.
+\\Se observan repositorios de corta duración, que hoy en día se encuentran en desuso y que no han tenido gran éxito dentro del mundo del software libre, como lo son \textit{nba-go} y \textit{ublhub}.
+En el lado opuesto, se encuentran los repositorios de larga trayectoria y que tienen un ritmo de actividad alto con una gran frecuencia de cambios a lo largo de los años, destacamos \textit{luxon}, 
+\textit{core}, \textit{notebook} y \textit{Rath}. Estos proyectos, debido a estar actualizados de manera constante, estiman menos costes en términos de esfuerzo para implementar  nuevas funcionalidades
+o mantenimientos.
+\\Los repositorios con menor frecuencia de cambios son \textit{Kap}, \textit{grimoirelab-perceval}, \textit{ant-design-pro} y \textit{ublhub}. Todos los mencionados excepto \textit{ublhub} siguen
+manteniendo su actividad en la actualidad aunque no tengan una alta tasa de actividad.
+
 
 \begin{figure}
   \centering
@@ -997,6 +1008,22 @@ observa un avance desde el 2008 hasta la actualidad, siendo del 2016 hasta el 20
 
 \subsection{Número de colaboradores}
 \label{subsec:número-colaboradores}
+
+La figura ~\ref{fig:grafica-colaboradores} se corresponde con la cantidad de colaboradores de un proyecto a lo largo de los años. Se observan proyectos con un bajo número de colaboradores
+a lo largo de su desarrollo, lo que se traduce en un bajo atractivo del proyecto dentro de la comunidad de software libre, entre los que destacamos \textit{ublhub}, \textit{Kap} y \textit{nba-go}.
+\\Por otro lado, se observan proyectos con gran número de colaboradores en un inicio pero que han ido disminuyendo a lo largo de los años, esto indica un decrecimiento del propio proyecto
+pudiendo llegar incluso a desaparecer. Entre estos proyectos se encuentran \textit{grimoirelab-perceval}, \textit{luxon}, \textit{ant-design-pro} y \textit{CodeEdit}.
+\\\textit{Notebook} y \textit{Rath} se corresponden con proyectos que han sufrido un pico en su desarrollo en el año 2022, siendo el año donde han alcanzado su número máximo de colaboradores,
+pero no han conseguido mantener esta tendencia, y en los próximos años su número de colaboradores vuelve a disminuir volviendo a situarse como en periodos anteriores.
+\\\textit{Core} es el repositorio que sufre mayores picos de crecimiento de colaboradores a lo largo de su desarrollo, por lo que resulta ser el proyecto más atractivo dentro de la comunidad 
+de software libre, llegando a contar hasta con 350 colaboradores.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=16cm, keepaspectratio]{img/contributors_graph.png}
+  \caption{Evolución del número de colaboradores a lo largo del tiempo}
+  \label{fig:grafica-colaboradores}
+\end{figure}
 
 \subsection{Evolución de la actividad de cada colaborador}
 \label{subsec:actividad-colaborador}
