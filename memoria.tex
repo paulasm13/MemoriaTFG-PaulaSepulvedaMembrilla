@@ -717,9 +717,10 @@ analizar la evolución del repositorio. Sus funciones de manejo son las siguient
 \subsection{Obtención de gráficos}
 \label{subsec:programa-graficos}
 
-La obtención de gráficos se consigue con la ejecución del script \texttt{graphics.py}. Realizando consultas a la base de datos obtengo los datos necesarios en cada caso para poder aplicar las métricas e índices correspondientes. Tras esto, y con ayuda
-de la librería \textit{matplotlib}, se obtienen los resultados y se interpretan de manera gráfica.
-\\Este script tiene varias funciones para obtener distintas gráficas, las cuales se desarrollan de manera muy mecánica puesto que siguen el mismo procedimiento.
+La obtención de gráficos se consigue con la ejecución del script \texttt{graphics.py}. Realizando consultas a la base de datos, utilizando en ellas distintos métodos, obtengo los datos necesarios en cada caso para poder aplicar las métricas e índices
+correspondientes. Tras esto, y con ayuda de la librería \textit{matplotlib}, se obtienen los resultados y se interpretan de manera gráfica.
+\\Este script tiene varias funciones para obtener distintas gráficas, las cuales se desarrollan de manera muy mecánica puesto que siguen el mismo procedimiento. Primero, se realiza una consulta y extracción en la base de datos, obteniendo así los datos
+correspondientes, que se guardan en un elemento DataFrame. Tras esto, se realizan los ajustes y cálculos correspondientes según las necesidades de cada función, y por último, se lleva a cabo una representación gráfica de los resultados.
 
 \section{Fases del proyecto} 
 \label{sec:fases-proyecto}
@@ -749,9 +750,9 @@ de cada repositorio elegido en la tabla ~\ref{tab:repositorios-descripción}.
     Wulkano                    & Kap                            & 227                            & 52                       & 2016                                 \\ \hline
     Moment.js                  & Luxon                          & 148                            & 232                      & 2015                                 \\ \hline
     Ant Design Team            & Ant-design-pro                 & 152                            & 321                      & 2017                                 \\ \hline
-    Nba-go                     & Nba-go                         & 000                            & 14                       & 2017                                 \\ \hline
+    Nba-go                     & Nba-go                         & 52                             & 14                       & 2017                                 \\ \hline
     Chaoss                     & grimoriolab-perceval           & 514                            & 40                       & 2015                                 \\ \hline
-    OpenUBL                    & ublhub                         & 000                            & 4                        & 2020                                 \\ 
+    OpenUBL                    & ublhub                         & 390                            & 4                        & 2020                                 \\ 
     \hline
   \end{tabular}
   \caption{Selección de repositorios para el análisis}
@@ -953,18 +954,24 @@ de los resultados.
 \chapter{Resultados}
 \label{chap:resultados}
 
-En este capítulo se incluyen los resultados de tu trabajo fin de grado.
-
-Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejemplos de haberla utilizado para que se vea su utilidad.
+En este capítulo se presentan los resultados obtenidos tras la aplicación de la metodología descrita en el capítulo anterior, así como su evaluación para obtener las
+conclusiones pertinentes.
+\\Se han desarrollado varias fases con el objetivo de alcanzar la meta del proyecto, que incluyen la creación de una herramienta, la recopilación de datos y un análisis
+estadístico. De esta manera, se busca comprender la evolución de los proyectos FOSS\footnote{Free/Open Source Software} alojados en GitHub.
 
 \section{Descripción de los datos recopilados} 
 \label{sec:datos-recopilados}
 
-En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de software libre alojados en GitHub, y se les han aplicado las métricas que se presentan en los siguientes apartados.
-
+Los datos recopilados y almacenados en una base de datos, se han obtenido de una selección de repositorios siguiendo distintos criterios que concluyen en la tabla ~\ref{tab:repositorios}.
+En su posterior análisis, han participado archivos de todo tipo, encontrando así diversidad de datos que se observarán en las representaciones gráficas de los resultados.
+\\En total, se han analizado 65.504.174 líneas de código de 11 repositorios de software libre alojados en GitHub, aplicándose las métricas que se presentan en los siguientes apartados.
+Los resultados obtenidos, en forma de gráficas, proporcionan una comprensión integral de la evolución del software libre.
 
 \section{Interpretación de los resultados} 
 \label{sec:interpretación-resultados}
+
+A continuación, tras recopilar y procesar los datos, así como aplicar la metodología correspondiente, se interpretan los resultados obtenidos del análisis graficamente. Estas gráficas
+muestran datos interesantes que reflejan el propósito final de este proyecto.
 
 \subsection{Lenguajes de programación en uso}
 \label{subsec:lenguajes}
@@ -972,12 +979,21 @@ En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de soft
 \subsection{Evolución de líneas pemanentes}
 \label{subsec:líneas-permanentes}
 
-
 \subsection{Estabilidad del código}
 \label{subsec:estabilidad-código}
 
 \subsection{Frecuencia de cambios}
 \label{subsec:commits}
+
+La figura ~\ref{fig:grafica-commits} muestr graficamente la evolución del número de commits en cada uno de los repositorios seleccionados a lo largo de los años. En el eje X, s
+observa un avance desde el 2008 hasta la actualidad, siendo del 2016 hasta el 2024 el período de mayor actividad
+
+\begin{figure}
+  \centering
+  \includegraphics[width=16cm, keepaspectratio]{img/commits_graph.png}
+  \caption{Evolución del número de commits a lo largo del tiempo}
+  \label{fig:grafica-commits}
+\end{figure}
 
 \subsection{Número de colaboradores}
 \label{subsec:número-colaboradores}
