@@ -746,9 +746,9 @@ de cada repositorio elegido en la tabla ~\ref{tab:repositorios-descripción}.
     Kanaries                   & Rath                           & 680                            & 17                       & 2019                                 \\ \hline
     CodeEdit                   & CodeEdit                       & 637                            & 123                      & 2022                                 \\ \hline
     HPC-AI Tech                & Open-Sora                      & 294                            & 49                       & 2024                                 \\ \hline
-    Wulkano                    & Kap                            & 000                            & 52                       & 2016                                 \\ \hline
-    Moment.js                  & Luxon                          & 000                            & 232                      & 2015                                 \\ \hline
-    Ant Design Team            & Ant-design-pro                 & 000                            & 321                      & 2017                                 \\ \hline
+    Wulkano                    & Kap                            & 227                            & 52                       & 2016                                 \\ \hline
+    Moment.js                  & Luxon                          & 148                            & 232                      & 2015                                 \\ \hline
+    Ant Design Team            & Ant-design-pro                 & 152                            & 321                      & 2017                                 \\ \hline
     Nba-go                     & Nba-go                         & 000                            & 14                       & 2017                                 \\ \hline
     Chaoss                     & grimoriolab-perceval           & 514                            & 40                       & 2015                                 \\ \hline
     OpenUBL                    & ublhub                         & 000                            & 4                        & 2020                                 \\ 
@@ -795,7 +795,7 @@ almacenamiento:
   \item \textbf{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la librería \textit{Pygments}, clasificandose como 'Archivo de datos' aquel
   archivo al que no se le ha podido identificar su lenguaje de programación, y que puede almacenar diversos datos como texto plano, datos binarios, etc. 
   \item \textbf{Commits}. Este dato se corresponde con el número de revisiones que se ha realizado sobre el archivo que se está analizando. Cada 'commit' se corresponde con la acción que se realiza para guardar los cambios realizados en los archivos de 
-  un repositorio. El conjunto de todos estos 'commits' forman el historial de revisiones de cada repositorio, por lo que el número de commits o revisiones nos puede indicar la frecuencia de actualizaciones de un proyecto.
+  un repositorio. El conjunto de todos estos commits forman el historial de revisiones de cada repositorio, por lo que el número de commits o revisiones nos puede indicar la frecuencia de actualizaciones de un proyecto.
   \item \textbf{Code\_ID}. Cada línea que se guarda en la base de datos se identifica con su propio ID.
   \item \textbf{Author\_Start}. Este valor se corresponde con el autor de la línea de código correspondiente, es decir, aquella persona que desarrolló esta línea por primera vez.
   \item \textbf{Date\_Start}. Este dato se corresponde con la fecha de creación de la línea de código correspondiente.
@@ -865,40 +865,39 @@ A continuación, se desarrolla el objetivo más importante de este proyecto que 
 FOSS\footnote{Free/Open Source Software} a lo largo de los años.
 Tras la recopilación, revisión y limpieza de datos, se procede a la interpretación de los datos para la realización de un análisis estadístico, donde se han tenido en cuenta gran diversidad de factores como la antiguedad y/o tamaño del proyecto, el número de desarrolladores, la
 complejidad que desarrolla, etc. Se realizan distintos análisis estadísticos tanto para el conjunto de todos los proyectos, como para cada uno de ellos de manera individual.
-En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de software libre alojados en GitHub, y se les han aplicado las métricas que se presentan en los siguientes apartados.
 
 \subsubsection{Lenguajes de programación en uso}
 \label{subsubsec:lenguajes}
 
 Se ha estudiado para cada uno de los repositorios analizados, los distintos lenguajes de programación utilizados por los desarrolladores del proyecto. De manera que, haciendo un cálculo con todos los archivos del repositorio en cuestión, se obtienen los porcentajes de los lenguajes
-de programación que tienen mayor presencia dentro de cada proyecto. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse
+de programación que tienen presencia dentro de cada proyecto. Se han tenido en cuenta todo tipo de lenguajes de programación, que se han obtenido mediante la librería \textit{Pygments},  y en caso de no corresponderse
 con ningún lenguaje conocido, se ha clasificado como un archivo que contiene datos en un formato específico definido por el software que lo utiliza, y se ha denominado 'Archivo de datos' o 'Archivo binario'.
 
-\[\text{Porcentaje} \, \text{Lenguaje_i} = \left( \frac{\text{Archivos} \, \text{lenguaje}_i}{\text{Total} \, \text{de} \, \text{archivos}} \right) \times 100\]
+\[\text{Porcentaje} \, \text{lenguaje} = \sum_{i=1}^{n} \left( \frac{\text{Archivo[lenguaje]}_i}{\text{Total} \, \text{de} \, \text{archivos[lenguaje]}} \right) \times 100\]
 
-\subsubsection{Líneas que permanecen en la actualidad}
+\subsubsection{Evolución de líneas pemanentes}
 \label{subsubsec:lineas-vivas}
 
 Resulta relevante estudiar el número de líneas que permanecen en la versión más actual del proyecto frente al momento de la creación del mismo, es decir, cuántas líneas permanecen intactas desde cualquier fecha pasada del proyecto. 
 Esto puede aportar una estimación del esfuerzo de mantenimiento de cara a un futuro, debido a que un proyecto con una gran cantidad de líneas de código antiguas es más difícil de mantener, ya que puede que los autores 
 hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar qué proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
 modificaciones en un período largo de tiempo, así como también se pueden observar proyectos con una tendencia de trabajo constante con la finalidad de mantener el proyecto actualizado.
-\\Entonces, se desarrollan dos métricas, una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra para obtener esta cantidad en porcentajes respecto al tamaño total
-del proyecto, y se aplican al total de repositorios analizados.
+\\Entonces, se desarrollan dos métricas, una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra para obtener los valores relativos respecto al tamaño total
+del proyecto, y se aplican al total de repositorios seleccionados.
 
-\[\text{Cantidad} \, \text{de} \, \text{líneas} \, \text{vivas} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
+\[\text{Valor} \, \text{absoluto} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right)\]
 
-\[\text{Porcentaje} \, \text{de} \, \text{líneas} \, \text{vivas} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right) \times 100 \]
+\[\text{Valor} \, \text{relativo} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
 
 
 \subsubsection{Estabilidad del código}
 \label{subsubsec:estabilidad-codigo}
 
 Medir la estabilidad del código es posible gracias a una métrica denominada \textit{Tasa de Churn}. El análisis de esta métrica implica evaluar cuántas líneas de código han sido eliminadas en un período de tiempo específico.
-Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en este proyecto
-consiste en representar la \textit{tasa de Churn} por cada archivo de los repositorios analizados, de manera que se compruebe así que archivos del repositorio se encuentran más obsoletos.
+Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en el proyecto
+consiste en representar la \textit{tasa de Churn} por cada repositorio a lo largo de los años, comprobando así qué proyectos sufren una limpieza o mejora del código, o si por el contrario, contienen gran cantidad de código obsoleto.
 
-\[\text{Tasa} \, \text{de} \, \text{Churn} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas} \, \text{año_i}}{\text{Líneas} \, \text{totales} \, \text{año_i}} \right)\]
+\[\text{Tasa} \, \text{de} \, \text{Churn} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
 
 \subsubsection{Frecuencia de cambios}
 \label{subsubsec:commits}
@@ -907,9 +906,9 @@ Visualizar la frecuencia de cambios a lo largo del tiempo resulta útil para ide
 inicial se corresponde con la etapa donde se lleva a cabo una alta frecuencia de cambios, pasando después a una etapa de estabilización con una frecuencia de cambios moderada, y siendo la etapa de mantenimiento aquella que tenga una
 baja frecuencia de cambios. Conocer las etapas del proyecto puede ser útil para realizar una planificación y estimación del trabajo de cara a un futuro, ya que un proyecto con cambios frecuentes y regular resulta menos costoso en
 términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
-\\La métrica utilizada para visualizar la frecuencia de cambios consiste en realizar un sumatorio del número de \textit{commits} realizados en cada uno de los archivos para cada repositorio concreto.
- 
-\[\text{Número} \, \text{de} \, \text{commits_i} = \sum_{i=1}^{n} \text{Commits} \, \text{archivo_i}\]
+\\La métrica utilizada nos permite visualizar la frecuencia de cambios, realizando un sumatorio del número de commits realizados en cada uno de los repositorios a lo largo de los años. 
+
+\[\text{Número} \, \text{de} \, \text{commits}} = \sum_{i=1}^{n} \text{Commit[repositorio][año]}_i\]
 
 \subsubsection{Número de colaboradores}
 \label{subsubsec:numero-desarrolladores}
@@ -918,9 +917,9 @@ Otro dato relevante consiste en conocer la cantidad de colaboradores de un proye
 a lo largo del tiempo puede indicar un proyecto en expansión y cada vez más relevante, así como el caso contrario se traduce en una reducción del interés o fases críticas del proyecto. En proyectos de código 
 abierto, el la colaboración de múltiples desarrolladores indica un signo de confianza y relevancia en la comunidad. Por otro lado, un número alto de colaboradores se traduce en una diversidad de contribuciones, que aportan
 diferentes perspectivas, habilidades y conocimientos, lo que puede conducir a un código más robusto con funcionalidades más variadas.
-\\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto al total de repositorios a lo largo del tiempo.
+\\Se calcula el número de colaboradores teniendo en cuenta el creador de cada línea de código respecto al total de repositorios a lo largo de los años.
 
-\[\text{Número} \, \text{de} \, \text{colaboradores_i} = \sum_{i=1}^{n} \text{Colaboradores} \, \text{repositorio_i}\]
+\[\text{Número} \, \text{de} \, \text{colaboradores}} = \sum_{i=1}^{n} \text{Colaborador[repositorio][año]}_i\]
 
 \subsubsection{Evolución de la actividad de cada colaborador}
 \label{subsubsec:actividad-desarrollador}
@@ -934,9 +933,9 @@ El hecho de visualizar las contribuciones individuales puede ayudar a mejorar el
 creadas por cada desarrollador del código para conocer los valores absolutos. Mientras que comparando con el número total de líneas de todos los colaboradores
 del proyecto se calculan los valores relativos.
 
-\[\text{Actividad} \, \text{por} \, \text{colaborador} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{colaborador_i}}{\text{Líneas} \, \text{totales}} \right)\]
+\[\text{Valor} \, \text{absoluto} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[colaborador][año]}_i}{\text{Líneas} \, \text{totales[colaborador]}} \right)\]
 
-\[\text{Porcentaje} \, \text{por} \, \text{colaborador} = \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas} \, \text{colaborador_i}}{\text{Líneas} \, \text{totales}} \right) \times 100\]
+\[\text{Valor} \, \text{relativo} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[colaborador][año]}_i}{\text{Líneas} \, \text{totales[colaborador]}} \right) \times 100\]
 
 \subsection{Representación gráfica de resultados}
 \label{subsec:graficos}
@@ -961,11 +960,18 @@ Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejem
 \section{Descripción de los datos recopilados} 
 \label{sec:datos-recopilados}
 
+En total, se han analizado XXXXXXXX líneas de código de XXXX proyectos de software libre alojados en GitHub, y se les han aplicado las métricas que se presentan en los siguientes apartados.
+
+
 \section{Interpretación de los resultados} 
 \label{sec:interpretación-resultados}
 
 \subsection{Lenguajes de programación en uso}
 \label{subsec:lenguajes}
+
+\subsection{Evolución de líneas pemanentes}
+\label{subsec:líneas-permanentes}
+
 
 \subsection{Estabilidad del código}
 \label{subsec:estabilidad-código}
