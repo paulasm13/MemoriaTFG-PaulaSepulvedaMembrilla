@@ -25,12 +25,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel} % Comenta esta línea si tu memoria es en inglés
 \usepackage{url}
-%\usepackage[dvipdfm]{graphicx}
+\usepackage[dvipdfm]{graphicx}
 \usepackage{graphicx}
 \usepackage{float}  %% H para posicionar figuras
 \usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
 \usepackage{latexsym}  %% Logo LaTeX
-
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{array}
+%\usepackage{graphicx} % Para usar \resizebox
 
 \title{Memoria del Proyecto}
 \author{Paula Sepúlveda Membrilla}
@@ -231,9 +233,9 @@ projects throughout their revision history, and providing a clear vision of the 
 %\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
 \listoffigures % indice de figuras
 %%%% Índice de tablas
-%\cleardoublepage
+\cleardoublepage
 %\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
-%\listoftables % indice de tablas
+\listoftables % indice de tablas
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -731,46 +733,79 @@ En esta etapa del proyecto, se tiene como objetivo identificar proyectos de soft
 información, para obtener una serie de repositorios que cumplan los siguientes criterios: que sean proyectos FOSS\footnote{Free/Open Source Software}, que estén alojados en la plataforma de GitHub y que proporcionen datos que resulten interesantes
 para analizar su evolución a lo largo de los años.
 \\Tras estudiar las distintas posibilidades, se han elegido los principales repositorios de los proyectos de la tabla ~\ref{tab:repositorios} para estudiar su evolución a lo largo del tiempo. En la selección se han considerado factores como el número de colaboradores y/o
-su variación a lo largo de los años, la diversidad de lenguajes de programación, la relevancia del proyecto en la plataforma GitHub y en la actualidad, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria.
+su variación a lo largo de los años, la diversidad de lenguajes de programación, la relevancia del proyecto en la plataforma GitHub y en la actualidad, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria. Se puede observar una breve descripción
+de cada repositorio elegido en la tabla ~\ref{tab:repositorios-descripción}.
 
 \begin{table}
  \begin{center}
-  \begin{tabular}{ | l | c | r |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
+  \begin{tabular}{ | l | c | c | c | c |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
     \hline
-    Uno & 2 & 3 \\ \hline % el hline nos da una línea vertical
-    Cuatro & 5 & 6 \\ \hline
-    Siete & 8 & 9 \\
+    \textbf{Proyecto}          & \textbf{Repositorio}           & \textbf{Nº archivos}           & \textbf{Contribuidores}  & \textbf{Año 1ª revisión}             \\ \hline % el hline nos da una línea vertical
+    Jupyter                    & Notebook                       & 265                            & 557                      & 2015                                 \\ \hline
+    Vue                        & Core                           & 660                            & 486                      & 2018                                 \\ \hline
+    Kanaries                   & Rath                           & 680                            & 17                       & 2019                                 \\ \hline
+    CodeEdit                   & CodeEdit                       & 637                            & 123                      & 2022                                 \\ \hline
+    HPC-AI Tech                & Open-Sora                      & 294                            & 49                       & 2024                                 \\ \hline
+    Wulkano                    & Kap                            & 000                            & 52                       & 2016                                 \\ \hline
+    Moment.js                  & Luxon                          & 000                            & 232                      & 2015                                 \\ \hline
+    Ant Design Team            & Ant-design-pro                 & 000                            & 321                      & 2017                                 \\ \hline
+    Nba-go                     & Nba-go                         & 000                            & 14                       & 2017                                 \\ \hline
+    Chaoss                     & grimoriolab-perceval           & 514                            & 40                       & 2015                                 \\ \hline
+    OpenUBL                    & ublhub                         & 000                            & 4                        & 2020                                 \\ 
     \hline
   \end{tabular}
-  \caption{Ejemplo de tabla. Aquí viene una pequeña descripción (el \emph{caption}, el pie de tabla/figura) del contenido de la tabla. Si la tabla no es autoexplicativa, siempre viene bien aclararla aquí.}
+  \caption{Selección de repositorios para el análisis}
   \label{tab:repositorios}
  \end{center}
 \end{table}
+
+\begin{table}
+  \begin{center}
+   \begin{tabular}{ | l | p{10cm} |} % p mide el ancho de la columna y permite el salto de línea de forma automática
+     \hline
+     \textbf{Repositorio}    & \textbf{Descripción}                                                                                                                  \\ \hline % el hline nos da una línea vertical
+     Notebook               & Aplicación interactiva para escribir y ejecutar código, crear visualizaciones y documentar código en un formato de cuaderno.           \\ \hline
+     Core                   & Herramienta de JavaScript progresiva y de adopción incremental para crear interfaces de usuario en la web.                             \\ \hline
+     Rath                   & Plataforma de nueva generación automatizada para el análisis exploratorio y la visualización de datos.                                 \\ \hline
+     CodeEdit               & Editor de código para macOS que proporciona una experiencia similar a TextEdit pero con características similares a Xcode.             \\ \hline
+     Open-Sora              & Plataforma dedicada a la producción eficiente de vídeo de alta calidad.                                                                \\ \hline
+     Kap                    & Grabador de pantalla construido con tecnología web.                                                                                    \\ \hline
+     Luxon                  & Biblioteca para trabajar con fechas y horas en JavaScript.                                                                             \\ \hline
+     Ant-design-pro         & Plantilla preconstruida en React que facilita el desarrollo de interfaces de usuario para aplicaciones empresariales.                  \\ \hline
+     Nba-go                 & Herramienta para fanáticos de la NBA, permite ver la NBA en vivo así como los resultados y los datos de los jugadores.                 \\ \hline
+     grimoriolab-perceval   & Perceval es un módulo de Python para recuperar datos de repositorios relacionados con el desarrollo de software.                       \\ \hline
+     ublhub                 & Crea y envía comprobantes electrónicos (XML) a la SUNAT (Superintendencia Nacional de Aduanas y de Administración Tributaria) de Perú. \\ 
+     \hline
+   \end{tabular}
+   \caption{Breve descripción de cada repositorio}
+   \label{tab:repositorios-descripción}
+  \end{center}
+ \end{table}
 
 \\Una vez elegidos los repositorios a analizar, se lleva a cabo la recopilación de los datos, que se trata de una tarea crucial para cualquier proyecto de análisis o minería de datos. En esta fase, recogemos los siguientes datos para su posterior 
 almacenamiento:
 
 \begin{itemize}
-  \item \textit{Repo\_Name}. Como el propio nombre indica, se refiere al nombre de cada repositorio. De manera que se pueda realizar una clasificación de líneas o archivos según pertenezcan a un repositorio concreto.
-  \item \textit{Repo\_ID}. Al realizar un análisis de varios repositorios, cada repositorio se identifica con un ID correspondiente. De esta forma, es más sencillo identificar los datos y podemos llevar a cabo la funcionalidad
+  \item \textbf{Repo\_Name}. Como el propio nombre indica, se refiere al nombre de cada repositorio. De manera que se pueda realizar una clasificación de líneas o archivos según pertenezcan a un repositorio concreto.
+  \item \textbf{Repo\_ID}. Al realizar un análisis de varios repositorios, cada repositorio se identifica con un ID correspondiente. De esta forma, es más sencillo identificar los datos y podemos llevar a cabo la funcionalidad
   de tabla de datos relacional.
-  \item \textit{File\_ID}. Al igual que cada repositorio se identifica con su propio ID, se hará lo mismo con cada archivo. De manera que se puedan clasificar las líneas de código pertenecientes a un archivo concreto.
-  \item \textit{File\_Name}. Este valor se corresponde con el nombre del archivo que se va a analizar.
-  \item \textit{File\_Path}. Este campo se corresponde con la ruta donde se encuentra el archivo que se está analizando, de manera que se pueda localizar en el repositorio clonado.
-  \item \textit{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la librería \textit{Pygments}, clasificandose como 'Archivo de datos' aquel
+  \item \textbf{File\_ID}. Al igual que cada repositorio se identifica con su propio ID, se hará lo mismo con cada archivo. De manera que se puedan clasificar las líneas de código pertenecientes a un archivo concreto.
+  \item \textbf{File\_Name}. Este valor se corresponde con el nombre del archivo que se va a analizar.
+  \item \textbf{File\_Path}. Este campo se corresponde con la ruta donde se encuentra el archivo que se está analizando, de manera que se pueda localizar en el repositorio clonado.
+  \item \textbf{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la librería \textit{Pygments}, clasificandose como 'Archivo de datos' aquel
   archivo al que no se le ha podido identificar su lenguaje de programación, y que puede almacenar diversos datos como texto plano, datos binarios, etc. 
-  \item \textit{Commits}. Este dato se corresponde con el número de revisiones que se ha realizado sobre el archivo que se está analizando. Cada 'commit' se corresponde con la acción que se realiza para guardar los cambios realizados en los archivos de 
+  \item \textbf{Commits}. Este dato se corresponde con el número de revisiones que se ha realizado sobre el archivo que se está analizando. Cada 'commit' se corresponde con la acción que se realiza para guardar los cambios realizados en los archivos de 
   un repositorio. El conjunto de todos estos 'commits' forman el historial de revisiones de cada repositorio, por lo que el número de commits o revisiones nos puede indicar la frecuencia de actualizaciones de un proyecto.
-  \item \textit{Code\_ID}. Cada línea que se guarda en la base de datos se identifica con su propio ID.
-  \item \textit{Author\_Start}. Este valor se corresponde con el autor de la línea de código correspondiente, es decir, aquella persona que desarrolló esta línea por primera vez.
-  \item \textit{Date\_Start}. Este dato se corresponde con la fecha de creación de la línea de código correspondiente.
-  \item \textit{Author\_End}. Este valor se corresponde con el desarrollador que eliminó la línea de código correspondiente.
-  \item \textit{Date\_End}.   Este dato se corresponde con la fecha en la que la línea de código ha sido eliminada.
-  \item \textit{Longevity}. Teniendo en cuenta la fecha de creación y la posible fecha de fin de cada línea de código, se realiza un cálculo de los días de vida que tiene la línea de código. El resultado de este cálculo se guarda en esta variable.
-  \item \textit{Comment\_Boolean}. Se clasifica como '1' la línea de código que se corresponde con un comentario de línea, teniendo en cuenta los distintos comentarios en los diversos lenguajes de programación. Así como se identifica como '0' en el
+  \item \textbf{Code\_ID}. Cada línea que se guarda en la base de datos se identifica con su propio ID.
+  \item \textbf{Author\_Start}. Este valor se corresponde con el autor de la línea de código correspondiente, es decir, aquella persona que desarrolló esta línea por primera vez.
+  \item \textbf{Date\_Start}. Este dato se corresponde con la fecha de creación de la línea de código correspondiente.
+  \item \textbf{Author\_End}. Este valor se corresponde con el desarrollador que eliminó la línea de código correspondiente.
+  \item \textbf{Date\_End}.   Este dato se corresponde con la fecha en la que la línea de código ha sido eliminada.
+  \item \textbf{Longevity}. Teniendo en cuenta la fecha de creación y la posible fecha de fin de cada línea de código, se realiza un cálculo de los días de vida que tiene la línea de código. El resultado de este cálculo se guarda en esta variable.
+  \item \textbf{Comment\_Boolean}. Se clasifica como '1' la línea de código que se corresponde con un comentario de línea, teniendo en cuenta los distintos comentarios en los diversos lenguajes de programación. Así como se identifica como '0' en el
   caso contrario, es decir, en caso de no ser un comentario de línea.
-  \item \textit{Words\_Count}. Este dato se corresponde con el cálculo de las palabras que forman cada línea de código. 
-  \item \textit{Code}. En esta variable se inserta la línea de código en cuestión que se está analizando.
+  \item \textbf{Words\_Count}. Este dato se corresponde con el cálculo de las palabras que forman cada línea de código. 
+  \item \textbf{Code}. En esta variable se inserta la línea de código en cuestión que se está analizando.
 \end{itemize}
 
 \subsection{Almacenamiento de datos}
@@ -787,11 +822,11 @@ de las operaciones realizadas sobre los datos de manera que todos los cambios se
 \\Las bases de datos relacionales se caracterizan por utilizar el lenguaje de consulta SQL, por lo que también se denominan bases de datos SQL. Mediante este lenguaje se realizan las operaciones básicas de interacción con la base de datos, definiendo a continuación las que han sido
 utilizadas en este proyecto:
 \begin{itemize}
-  \item \textit{CREATE DATABASE}. Se corresponde con la sentencia utilizada para crear la base de datos \textit{Analysis\_GitHub\_Repository}.
-  \item \textit{CREATE TABLE}. Como el propio nombre indica, esta sentencia o query se utiliza para crear una tabla dentro de la base de datos. Se deben de especificar los campos que contenga la tabla, así como sus tipos, sus claves primarias o foráneas, o incluso se pueden restringir
+  \item \textbf{CREATE DATABASE}. Se corresponde con la sentencia utilizada para crear la base de datos \textit{Analysis\_GitHub\_Repository}.
+  \item \textbf{CREATE TABLE}. Como el propio nombre indica, esta sentencia o query se utiliza para crear una tabla dentro de la base de datos. Se deben de especificar los campos que contenga la tabla, así como sus tipos, sus claves primarias o foráneas, o incluso se pueden restringir
   algunos campos para que sean válidos o no los valores \textit{NULL}.
-  \item \textit{INSERT INTO}. Esta sentencia se utiliza para insertar valores en una tabla existente en la base de datos. Se deben de especificar los valores a insertar y el propio nombre de la tabla.
-  \item \textit{SELECT}. Esta sentencia aporta diferentes funcionalidades, siendo una de ellas la verificación de la existencia de una tabla de la base de datos, con el objetivo de poder crear la tabla correspondiente en caso de ser necesario así como solamente tener acceso a ella
+  \item \textbf{INSERT INTO}. Esta sentencia se utiliza para insertar valores en una tabla existente en la base de datos. Se deben de especificar los valores a insertar y el propio nombre de la tabla.
+  \item \textbf{SELECT}. Esta sentencia aporta diferentes funcionalidades, siendo una de ellas la verificación de la existencia de una tabla de la base de datos, con el objetivo de poder crear la tabla correspondiente en caso de ser necesario así como solamente tener acceso a ella
   en caso de ya estar creada. Por otro lado, se utiliza esta sentencia para obtener distintos datos de las tablas de la base de datos, en función de los campos que consideremos necesarios para calcular la métrica correspondiente y representar su respectivo gráfico resultante.
 \end{itemize}
 
