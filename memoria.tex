@@ -920,30 +920,38 @@ datos en un formato específico definido por el software que lo utiliza, y se ha
 
 \[\text{Porcentaje} \, \text{lenguaje} = \sum_{i=1}^{n} \left( \frac{\text{Archivo[lenguaje]}_i}{\text{Total} \, \text{de} \, \text{archivos[lenguaje]}} \right) \times 100\]
 
-\subsubsection{Evolución de líneas pemanentes}
+\subsubsection{Estabilidad del código}
 \label{subsubsec:lineas-vivas}
 
-Resulta relevante estudiar el número de líneas que permanecen en la versión más actual del proyecto frente al momento de la creación del mismo, es decir, cuántas líneas permanecen intactas desde cualquier fecha pasada del proyecto. 
-Esto puede aportar una estimación del esfuerzo de mantenimiento de cara a un futuro, debido a que un proyecto con una gran cantidad de líneas de código antiguas es más difícil de mantener, ya que puede que los autores 
-hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto. Además, se puede observar qué proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido
-modificaciones en un período largo de tiempo, así como también se pueden observar proyectos con una tendencia de trabajo constante con la finalidad de mantener el proyecto actualizado.
+Es de especial interés estudiar la evolución de las líneas de código, comparando el porcentaje de líneas permanentes con la cantidad de líneas eliminadas a lo largo de los años. Esta comparación permite entender mejor la estabilidad y el mantenimiento del código en un proyecto.
 
-\\Entonces, se desarrollan dos métricas, una de ellas para obtener el número de líneas permanentes en la actualidad a lo largo de los años en valores absolutos, y otra para obtener los valores relativos respecto al tamaño total
-del proyecto, y se aplican al total de repositorios seleccionados.
+\\Se desarrolla una primera métrica para obtener el porcentaje de líneas que permanecen en la versión más actual del proyecto desde su creación, es decir, el porcentaje de código que permanece intacto desde cualquier fecha pasada del proyecto. Este porcentaje refleja una estimación del
+esfuerzo de mantenimiento del código, ya que un proyecto con gran cantidad de líneas de código antiguas es más difícil de mantener, debido a que puede que los autores hayan olvidado la razón de los cambios o incluso puede que ya ni siquiera formen parte del proyecto.
+Se desarrolla una segunda métrica para evaluar el número de líneas eliminadas a lo largo del tiempo, proporcionando así un conocimiento sobre la actividad y volatilidad del código.
 
-\[\text{Valor} \, \text{absoluto} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right)\]
+\\La comparación de ambas métricas permite observar que proyectos se encuentran obsoletos en la actualidad, debido a que no hayan sufrido modificaciones en un período largo de tiempo, así como también que proyectos tienen una tendencia constante con la finalidad de mantener el proyecto
+actualizado.
 
-\[\text{Valor} \, \text{relativo} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
+\[\text{Cantidad} \, \text{de} \, \text{líneas} \, \text{eliminadas} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right)\]
+
+\[\text{Porcentaje} \, \text{de} \, \text{líneas} \, \text{permanentes} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{vivas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
 
 
-\subsubsection{Estabilidad del código}
-\label{subsubsec:estabilidad-codigo}
+\subsubsection{Presencia de comentarios}
+\label{subsubsec:cantidad-comentarios}
 
-Medir la estabilidad del código es posible gracias a una métrica denominada \textit{Tasa de Churn}. El análisis de esta métrica implica evaluar cuántas líneas de código han sido eliminadas en un período de tiempo específico.
-Proporciona una medida de la actividad y volatilidad del código, resulta ser una herramienta muy útil para comprender la dinámica de cambio de un código a lo largo del tiempo. La finalidad de utilizar esta métrica en el proyecto
-consiste en representar la \textit{tasa de Churn} por cada repositorio a lo largo de los años, comprobando así qué proyectos sufren una limpieza o mejora del código, o si por el contrario, contienen gran cantidad de código obsoleto.
+Conocer la presencia de comentarios en un repositorio resulta extremadamente útil para obtener una evaluación completa y equilibrada de la documentación del código, identificar áreas de mejora, y
+asegurar la mantenibilidad y calidad del proyecto a largo plazo. Para ello, se desarrollan dos métricas, una de ellas para conocer la cantidad de comentarios que tiene un repositorio, y otra para evaluar el porcentaje de código comentado en relación al total de
+líneas que forman el proyecto.
 
-\[\text{Tasa} \, \text{de} \, \text{Churn} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \text{eliminadas[repositorio][año]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
+\\Estas métricas permiten identificar si los proyectos siguen las prácticas básicas de documentación, identificando así que proyectos están mejor documentados y cuales necesitan mejorar en este aspecto. Se pueden identificar áreas de mejora específicas donde la documentación
+sea insuficiente, así como valorar la relevancia de estos comentarios para que una cantidad excesiva no aporte demasiada complejidad al código.
+
+
+\[\text{Valor} \, \text{absoluto} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \textit{de} \, \text{comentarios[repositorio]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right)\]
+
+\[\text{Valor} \, \text{relativo} = \sum_{i=1}^{n} \left( \frac{\text{Líneas} \, \textit{de} \, \text{comentarios[repositorio]}_i}{\text{Líneas} \, \text{totales[repositorio]}} \right) \times 100 \]
+
 
 \subsubsection{Frecuencia de cambios}
 \label{subsubsec:commits}
@@ -1060,10 +1068,10 @@ JavaScript son los predominantes con un 27\% y un 3\% respectivamente. Otros len
   \label{fig:lenguajes-rath}
 \end{figure}
 
-\subsection{Evolución de líneas pemanentes}
+\subsection{Estabilidad del código}
 \label{subsec:líneas-permanentes}
 
-\subsection{Estabilidad del código}
+\subsection{Presencia de comentarios}
 \label{subsec:estabilidad-código}
 
 \subsection{Frecuencia de cambios}
