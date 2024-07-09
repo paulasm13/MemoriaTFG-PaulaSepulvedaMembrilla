@@ -1073,18 +1073,32 @@ Nginx configuration file y CSS, con un 0,24\% cada uno de ellos.
 \subsection{Estabilidad del código}
 \label{subsec:estabilidad-código}
 
+En este análisis estadístico se han evaluado todos los repositorios en conjunto, estudiando la evolución de cada línea del código, de manera que se compara la evolución de las líneas permanentes
+a lo largo de los años en comparación con las líneas que han sido eliminadas. Dicho de otra manera, se estudia la evolución de las líneas vivas en relación a las líneas muertas en un período de tiempo.
+
+\\Por un lado, la gráfica ~\ref{fig:líneas-muertas} estudia la cantidad de líneas que han sido eliminadas a lo largo de los años, mientras que la figura~\ref{fig:líneas-vivas} muestra el porcentaje de
+código que no se ha modificado en relación a fechas anteriores. El análisis muestra una relación inversamente proporcional entre ambas gráficas.
+
+\\Como se puede observar, el repositorio de \textit{nba-go} en ningún momento ha eliminado líneas de código, por lo que practicamente el 100\% del código de programación se mantiene constante desde su
+primera creación, siendo un proyecto que se ha quedado desactualizado y en desuso desde el año 2019. Otro repositorio a destacar el denominado \textit{Kap}, donde se observa que unicamente se
+han eliminado líneas de código al principio de su desarrollo, teniendo una actividad pasiva en estos últimos años de desarrollo, conservando la mayor parte de su código de manera estática.
+
+\\Por otro lado, se pueden observar proyectos con actividades de desarrollo activas y mantenimiento constante a lo largo de los años. En este caso, destacan los repositorios \textit{core} y 
+\textit{luxon}, que desde su creación han tenido una tendencia de desarrollo activa con la finalidad de mantener actualizado el proyecto, siendo así de mayor atractivo entre la comunidad de 
+software libre. También cabe mencionar el repositorio \textit{notebook}, que entra en una fase de desarrollo activo a partir del año 2019.
+
 \begin{figure}
   \centering
   \includegraphics[width=16cm, keepaspectratio]{img/deleted_lines_abs.png}
   \caption{Cantidad de líneas eliminadas a lo largo del tiempo}
-  \label{fig:deleted-lines}
+  \label{fig:líneas-muertas}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=16cm, keepaspectratio]{img/alive_lines_rel.png}
   \caption{Porcentaje de líneas permanentes a lo largo del tiempo}
-  \label{fig:alive-lines}
+  \label{fig:líneas-vivas}
 \end{figure}
 
 \subsection{Presencia de comentarios}
