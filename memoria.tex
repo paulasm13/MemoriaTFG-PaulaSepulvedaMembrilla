@@ -1074,13 +1074,13 @@ Nginx configuration file y CSS, con un 0,24\% cada uno de ellos.
 \label{subsec:estabilidad-código}
 
 En este análisis estadístico se han evaluado todos los repositorios en conjunto, estudiando la evolución de cada línea del código, de manera que se compara la evolución de las líneas permanentes
-a lo largo de los años en comparación con las líneas que han sido eliminadas. Dicho de otra manera, se estudia la evolución de las líneas vivas en relación a las líneas muertas en un período de tiempo.
+a lo largo de los años en relación con las líneas que han sido eliminadas. Dicho de otra manera, se estudia la evolución de las líneas vivas en relación a las líneas muertas en un período de tiempo.
 
-\\Por un lado, la gráfica ~\ref{fig:líneas-muertas} estudia la cantidad de líneas que han sido eliminadas a lo largo de los años, mientras que la figura~\ref{fig:líneas-vivas} muestra el porcentaje de
+\\La gráfica de la figura~\ref{fig:líneas-muertas} estudia la cantidad de líneas que han sido eliminadas a lo largo de los años, mientras que la figura~\ref{fig:líneas-vivas} muestra el porcentaje de
 código que no se ha modificado en relación a fechas anteriores. El análisis muestra una relación inversamente proporcional entre ambas gráficas.
 
-\\Como se puede observar, el repositorio de \textit{nba-go} en ningún momento ha eliminado líneas de código, por lo que practicamente el 100\% del código de programación se mantiene constante desde su
-primera creación, siendo un proyecto que se ha quedado desactualizado y en desuso desde el año 2019. Otro repositorio a destacar el denominado \textit{Kap}, donde se observa que unicamente se
+\\Como se puede observar, el repositorio de \textit{nba-go} en ningún momento ha eliminado líneas de código, por lo que practicamente el 100\% del código de programación se mantiene constante desde sus 
+inicios, siendo un proyecto que se ha quedado desactualizado y en desuso desde el año 2019. Otro repositorio a destacar es el denominado \textit{Kap}, donde se observa que unicamente se
 han eliminado líneas de código al principio de su desarrollo, teniendo una actividad pasiva en estos últimos años de desarrollo, conservando la mayor parte de su código de manera estática.
 
 \\Por otro lado, se pueden observar proyectos con actividades de desarrollo activas y mantenimiento constante a lo largo de los años. En este caso, destacan los repositorios \textit{core} y 
@@ -1104,18 +1104,30 @@ software libre. También cabe mencionar el repositorio \textit{notebook}, que en
 \subsection{Presencia de comentarios}
 \label{subsec:presencia-comentarios}
 
+Conocer la presencia de comentarios dentro de un repositorio resulta bastante útil para asegurar la mantenibilidad y la calidad del proyecto a largo plazo. La gráfica de la figura~\ref{fig:comentarios-abs}
+muestra la cantidad de comentarios de cada repositorio, mientras que la gráfica de la figura~\ref{fig:comentarios-rel} aporta una visión en relación al total de líneas del código.
+
+\\El repositorio \textit{core} posee la mayor cantidad de comentarios de línea, siendo un total de 343.562. Sin embargo, en relación con el total de líneas de código del proyecto no se considera el proyecto 
+mejor documentado, ya que esta cifra se corresponde con el 4,49\% del total del código de programación. Los repositorios con el porcentaje más alto de comentarios de línea se corresponden con \textit{Open-Sora} y 
+\textit{grimoirelab-perceval}, con un 9,63\% y un 6,08\% respectivamente. En conclusión, estos tres proyectos resultan ser los que ofrecen un mejor mantenimiento a largo plazo, debido a que tienen en cuenta en el 
+proceso de desarrollo seguir buenas prácticas que ofrezcan calidad al proyecto.
+
+\\En contraste, los repositorios menos documentados tanto en valores relativos como absolutos son \textit{Kap} y \textit{nba-go}, con un porcentaje que no llega al 0,4\% del total del código. Casualmente, ambos proyectos 
+se han quedado desactualizados debido a que tienen una actividad de desarrollo baja o nula desde hace años. Por lo tanto, se demuestra que un proyecto de código con una documentación escasa se traduce en una 
+difícil mantenibilidad a largo plazo.
+
 \begin{figure}
   \centering
   \includegraphics[width=16cm, keepaspectratio]{img/comments_abs.png}
   \caption{Líneas de comentarios en valor absoluto}
-  \label{fig:comments-abs}
+  \label{fig:comentarios-abs}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=16cm, keepaspectratio]{img/comments_rel.png}
   \caption{Líneas de comentarios en valor relativo}
-  \label{fig:comments-rel}
+  \label{fig:comentarios-rel}
 \end{figure}
 
 \subsection{Frecuencia de cambios}
@@ -1131,8 +1143,8 @@ siendo el año 2023 el más destacable.
 \\Por otra parte, el repositorio \textit{code-edit} es el proyecto más reciente, iniciando su desarrollo en 2022, y mostrando su mayor período de actividad durante ese mismo año.
 
 \\Se observan repositorios de corta duración que hoy en día se encuentran en desuso y  no han tenido gran éxito dentro del mundo del software libre, como lo son \textit{nba-go} y \textit{ublhub}.
-En contraste, los repositorios con larga trayectoria y un ritmo de actividad alto con una gran frecuencia de cambios a lo largo de los años, son \textit{luxon}, \textit{core}, \textit{notebook} y
-\textit{Rath}. Estos proyectos, debido a su constante actualización, estiman menores costes en términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
+En contraste, los repositorios con larga trayectoria y un ritmo de actividad alto con una gran frecuencia de cambios a lo largo de los años, son \textit{luxon}, \textit{core} y \textit{notebook}. Estos proyectos,
+debido a su constante actualización, estiman menores costes en términos de esfuerzo para implementar nuevas funcionalidades o mantenimientos.
 
 \\Los repositorios con menor frecuencia de cambios son \textit{Kap}, \textit{grimoirelab-perceval}, \textit{ant-design-pro} y \textit{ublhub}. Todos los mencionados, excepto \textit{ublhub}, siguen
 manteniendo su actividad en la actualidad aunque no tengan una alta tasa de actividad.
