@@ -312,7 +312,7 @@ que demuestren que la longevidad y el mantenimiento del código son heterogéneo
 \\Por tanto, el objetivo del proyecto consiste en estudiar la evolución y propiedades de varios proyectos de software libre a través del estudio
 empírico, y en aplicar un análisis estadístico de su código fuente.
 Se estudia el comportamiento de los proyectos FOSS\footnote{Free/Open Source Software} más relevantes de GitHub, se identifican las fuentes de datos
-que ofrecen de manera pública y se presenta una metodología para el análisis de los datos extraidos, datos interesantes entre los cuáles encontrampos 
+que ofrecen de manera pública y se presenta una metodología para el análisis de los datos extraídos, datos interesantes entre los cuáles encontramos 
 la cantidad de colaboradores o los lenguajes de programación más utilizados.
 De esta manera, se puede conocer mejor el fenómeno del software libre, el proceso de creación de software y cómo va evolucionando su mantenimiento,
 se describe la mecánica de desarrollo de los movimientos de software libre.
@@ -322,8 +322,8 @@ se describe la mecánica de desarrollo de los movimientos de software libre.
 \section{Estructura de la memoria}
 \label{sec:estructura}
 
-A continuacion, se describe la estructura de la memoria, exponiendo el contenido de cada uno de los capítulos, proporcionando así
-una guía organizada del Trabajo de Fin de Grado para una mejor lectura y comprension de este.
+A continuación, se describe la estructura de la memoria, exponiendo el contenido de cada uno de los capítulos, proporcionando así
+una guía organizada del Trabajo de Fin de Grado para una mejor lectura y comprensión de este.
 
 \begin{itemize}
   
@@ -333,7 +333,7 @@ una guía organizada del Trabajo de Fin de Grado para una mejor lectura y compre
 
   \item \textbf{Capítulo~\ref{chap:objetivos}. Objetivos}
   \\En este capítulo se describe el objetivo principal del Trabajo Fin de Grado, así como los objetivos específicos necesarios
-  que van a guiar nuestro proyecto. Incluye una planificacion temporal de los objetivos mencionados. 
+  que van a guiar nuestro proyecto. Incluye una planificación temporal de los objetivos mencionados. 
   
   \item \textbf{Capítulo~\ref{chap:estado-arte}. Estado del arte}
   \\En este capítulo se proporciona información detallada sobre el diseño, las características y los usos de cada
@@ -382,7 +382,7 @@ alojados en la plataforma de GitHub, mediante un estudio empírico detallado y l
 A través de este enfoque, se pretende obtener una comprensión íntegra de cómo el proyecto ha cambiado y se ha desarrollado a lo
 largo del tiempo, identificando patrones, tendencias y características del código que puedan influir en su calidad, mantenibilidad y eficiencia.
 
-\\Este Trabajo Fin de Grado no solo implica un análisis histórico, sino que también incluye la aplicacion de diversas métricas
+\\Este Trabajo Fin de Grado no solo implica un análisis histórico, sino que también incluye la aplicación de diversas métricas
 para evaluar distintos aspectos del código fuente. 
 Al combinar métodos empíricos con análisis estadísticos robustos, este proyecto busca proporcionar una visión detallada y objetiva
 del comportamiento evolutivo del software.
@@ -540,7 +540,7 @@ más utilizadas en la actualidad.
 
 LaTeX\footnote{\url{https://es.overleaf.com/}} es un sistema de composición de textos o documentos formado por una colección de macros \textit{Tex}. Fue desarrollado
 por Leslie Lamport en 1984, y en la actualidad se utiliza para la generación de artículos y libros científicos que incluyen, entre otros elementos, expresiones matemáticas.
-Se utiliza para la composicin de tesis y libros técnicos, dado que la calidad tipográfica de los documentos realizados en LaTeX se considera adecuadas a las necesidades de
+Se utiliza para la composición de tesis y libros técnicos, dado que la calidad tipográfica de los documentos realizados en LaTeX se considera adecuadas a las necesidades de
 una editorial científica de primera línea, muchas de las cuales ya lo emplean.
 
 \\\textit{Tex} es una mezcla entre procesador de textos y lenguaje de programación utilizado fundamentalmente para escribir documentos de contenido científico
@@ -835,7 +835,7 @@ almacenamiento:
   \item \textbf{File\_ID}. Al igual que cada repositorio se identifica con su propio ID, se hará lo mismo con cada archivo. De manera que se puedan clasificar las líneas de código pertenecientes a un archivo concreto.
   \item \textbf{File\_Name}. Este valor se corresponde con el nombre del archivo que se va a analizar.
   \item \textbf{File\_Path}. Este campo se corresponde con la ruta donde se encuentra el archivo que se está analizando, de manera que se pueda localizar en el repositorio clonado.
-  \item \textbf{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la biblioteca \textit{Pygments}, clasificandose como `Archivo de datos' aquel
+  \item \textbf{File\_Language}. Este dato se corresponde con el lenguaje del archivo que se está analizando. El lenguaje se ha identificado mediante la biblioteca \textit{Pygments}, clasificándose como `Archivo de datos' aquel
   archivo al que no se le ha podido identificar su lenguaje de programación, y que puede almacenar diversos datos como texto plano, datos binarios, etc. 
   \item \textbf{Commits}. Este dato se corresponde con el número de revisiones que se ha realizado sobre el archivo que se está analizando. Cada 'commit' se corresponde con la acción que se realiza para guardar los cambios realizados en los archivos de 
   un repositorio. El conjunto de todos estos commits forman el historial de revisiones de cada repositorio, por lo que el número de commits o revisiones nos puede indicar la frecuencia de actualizaciones de un proyecto.
@@ -1136,7 +1136,7 @@ difícil mantenibilidad a largo plazo.
 La figura~\ref{fig:grafica-commits} muestra gráficamente la evolución del número de commits en cada uno de los repositorios seleccionados a lo largo de los años. Se observa una etapa de
 desarrollo desde el año 2008 hasta la actualidad, siendo el período de mayor actividad desde el año 2016 hasta el año 2024 .
 
-\\El repositorio \textit{notebook} destaca como el proyecto más longevo, ya que comenzó su desarrollo en el año 2008 y sigue vigente en la actualidad.
+\\El repositorio \textit{Notebook} destaca como el proyecto más longevo, ya que comenzó su desarrollo en el año 2008 y sigue vigente en la actualidad.
 Se identifica con un desarrollo constante aunque con períodos de baja actividad, y no ha experimentado su mayor etapa de desarrollo hasta el año 2019, cuando comienza a sufrir varios períodos intensos de actividad,
 siendo el año 2023 el más destacable.
 
@@ -1169,7 +1169,7 @@ pudiendo llegar incluso a desaparecer. Entre estos proyectos se encuentran \text
 \textit{luxon}, que tiene un importante descenso desde el año 2017 pasando de 110 a tan solo 2 colaboradores; \textit{ant-design-pro}, que de llegar a tener 150 colaboradores en el año 2018 pasa a 
 tener tan solo 3 en la actualidad; y finalmente \textit{CodeEdit}, que comienza en 2022 con 142 desarrolladores y en el año siguiente desciende hasta 28.
 
-\\Los repositorios \textit{notebook} y \textit{Rath} experimentaron un pico de desarrollo en el año 2022, alcanzando su número máximo de colaboradores en ese año, siendo de 110 y 203 contribuidores respectivamente.
+\\Los repositorios \textit{Notebook} y \textit{Rath} experimentaron un pico de desarrollo en el año 2022, alcanzando su número máximo de colaboradores en ese año, siendo de 110 y 203 contribuidores respectivamente.
 Sin embargo, no han logrado mantener esta tendencia y en los años siguientes el número de colaboradores disminuyó, volviendo a niveles similares a los de años anteriores.
 
 \\El repositorio \textit{Core} destaca por sufrir los mayores picos de crecimiento en cuanto a colaboradores a lo largo de su desarrollo, lo que lo convierte en el proyecto más atractivo dentro de la
