@@ -183,7 +183,7 @@ posibles tendencias y/o patrones en este sector.
 \\Para llevar acabo este análisis, se ha desarrollado una herramienta\footnote{https://github.com/paulasm13/TFG.git} que permite analizar todas las líneas de código presentes
 en un repositorio de GitHub. Esta herramienta realiza un recorrido ascendente por todo el árbol del repositorio, analizando cada
 archivo en cada subdirectorio. El análisis se basa en el uso del comando \textit{git blame}, lo que permite obtener datos relevantes
-de cada versión del archivo investigando su historial de revisiones. 
+de cada versión del archivo investigando su historial de revisiones. \cite{dauber2018git} \cite{raula2018git}
 Se ha hecho una selección de repositorios teniendo en cuenta diversos criterios, tales como el número de colaboradores y sus
 contribuciones, la diversidad de lenguajes de programación utilizados, la relevancia del proyecto en la plataforma GitHub y su 
 vigencia en la actualidad. Se han incluido tanto proyectos de reciente creación como aquellos con una larga trayectoria, para
@@ -209,7 +209,7 @@ evolution of open source over the years, as well as exploring the presence of po
 
 \\To carry out this analysis, a tool\footnote{https://github.com/paulasm13/TFG.git} has been developed to analyse all the lines of code present in a GitHub repository. This tool performs a
 bottom-up traversal of the entire repository tree, analysing each file in each subdirectory. The analysis is based on the use of the \textit{git blame}
-command, which allows to obtain relevant data for each version of the file by investigating its revision history. A selection of repositories
+command, which allows to obtain relevant data for each version of the file by investigating its revision history. \cite{dauber2018git} \cite{raula2018git} A selection of repositories
 has been made taking into account various criteria, such as the number of contributors and their contributions, the diversity of programming
 languages used, the relevance of the GitHub platform and its current relevance. Both recently created projects and those with a long history
 have been included, in order to provide a more complete and representative view of the current state of open source.
@@ -288,7 +288,7 @@ habilidades para realizar un correcto análisis de los datos obtenidos.
 El software libre permite a los desarrolladores realizar un completo análisis cuantitativo del
 código y de todos los parámetros involucrados en su producción, debido a que están disponibles públicamente.
 Al contar con datos de acceso público del desarrollo de software, permite llevar a cabo estudios estadísticos
-para estudiar la evolución del software.
+para estudiar la evolución del software. \cite{poo2010estudio}
 
 \\En todo este proceso, tiene gran importancia la utilización de un sistema de control de versiones, donde se permita
 rastrear los cambios realizados en el pasado. De esta manera, se puede obtener un análisis de la estructura histórica
@@ -299,7 +299,7 @@ es una actividad relevante para evitar posible código obsoleto de desarrollador
 
 \\Aunque la Ingeniería de Software es una disciplina que se ha consolidado a través de los años, actualmente
 existen muy pocos análisis empíricos sobre la arqueología del software. La falta de estudios junto con el atractivo hacia el
-desarrollo comunitario del software libre, así como la importancia para la Ingeniería de Software de modelar con datos empíricos,
+desarrollo comunitario del software libre, así como la importancia para la Ingeniería de Software de modelar con datos empíricos \cite{robles2005empirical},
 nos impulsa a llevar a cabo este proyecto.
 
 \section{Objetivos e hipótesis}
@@ -307,11 +307,11 @@ nos impulsa a llevar a cabo este proyecto.
 
 Nuestra hipótesis es que, mediante un estudio empírico de las prácticas de desarrollo de software, la aplicación de minería de datos
 al proyecto, el análisis de su evolución a lo largo del tiempo y la correlación de datos, se pueden determinar y aplicar métricas
-que demuestren que la longevidad y el mantenimiento del código son heterogéneos y varían entre los diferentes componentes de varios proyectos.
+que demuestren que la longevidad y el mantenimiento del código son heterogéneos y varían entre los diferentes componentes de varios proyectos. \cite{ghosh02:_developer_survey}
 
 \\Por tanto, el objetivo del proyecto consiste en estudiar la evolución y propiedades de varios proyectos de software libre a través del estudio
 empírico, y en aplicar un análisis estadístico de su código fuente.
-Se estudia el comportamiento de los proyectos FOSS\footnote{Free/Open Source Software} más relevantes de GitHub, se identifican las fuentes de datos
+Se estudia el comportamiento de los proyectos FOSS\footnote{Free/Open Source Software} \cite{share2001open} más relevantes de GitHub, se identifican las fuentes de datos
 que ofrecen de manera pública y se presenta una metodología para el análisis de los datos extraidos, datos interesantes entre los cuáles encontrampos 
 la cantidad de colaboradores o los lenguajes de programación más utilizados.
 De esta manera, se puede conocer mejor el fenómeno del software libre, el proceso de creación de software y cómo va evolucionando su mantenimiento,
@@ -521,7 +521,7 @@ manteniendo un seguimiento de la evolución del proyecto.
 
 \\Linus Torvalds, un programador finlandés con gran importancia dentro del software libre, creó en 2005 su propio sistema de control de versiones llamado \textit{Git} para ser utilizado
 en proyectos comerciales y de software libre. Posteriormente, en 2008, varios desarrolladores fundaron la plataforma GitHub, ofreciendo una interfaz fácil de utilizar que ha contribuido a la
-popularización de \textit{Git}.
+popularización de \textit{Git}. \cite{lopez2015github}
 
 \\Es un sistema de control de versiones eficiente, fiable y compatible que se ha convertido en el estándar por excelencia para el desarrollo de software.
 
@@ -777,7 +777,7 @@ para analizar su evolución a lo largo de los años.
 
 \\Tras estudiar las distintas posibilidades, se han elegido los principales repositorios de los proyectos de la tabla~\ref{tab:repositorios} para estudiar su evolución a lo largo del tiempo. En la selección se han considerado factores como el número de colaboradores y/o
 su variación a lo largo de los años, la diversidad de lenguajes de programación, la relevancia del proyecto en la plataforma GitHub y en la actualidad, así como que sean tanto proyectos de nueva creación como proyectos de larga trayectoria. Se puede observar una breve descripción
-de cada repositorio elegido en la tabla~\ref{tab:repositorios-descripción}.
+de cada repositorio elegido en la tabla~\ref{tab:repositorios-descripción}. \cite{FOSS_projects}
 
 \begin{table}
  \begin{center}
@@ -907,7 +907,7 @@ de evitar errores al insertar los datos en la tabla denominada `Code'.
 \label{subsec:metricas}
 
 A continuación, se desarrolla el objetivo más importante de este proyecto que consiste en el análisis de los datos. Mediante la implementación de distintas métricas, se pretenden estudiar distintos aspectos que resultan interesantes para analizar la evolución de los proyectos
-FOSS\footnote{Free/Open Source Software} a lo largo de los años.
+FOSS\footnote{Free/Open Source Software} a lo largo de los años. \cite{robles2005self} 
 Tras la recopilación, revisión y limpieza de datos, se procede a la interpretación de los datos para la realización de un análisis estadístico, donde se han tenido en cuenta gran diversidad de factores como la antigüedad y/o tamaño del proyecto, el número de desarrolladores, la
 complejidad que desarrolla, etc. Se realizan distintos análisis estadísticos tanto para el conjunto de todos los proyectos, como para cada uno de ellos de manera individual.
 
